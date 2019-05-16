@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {
+  Router
+} from '@reach/router'
+
+import './styles/main.css'
+
+import { useNetlifyIdentity } from 'react-netlify-identity'
+import { IdentityContext } from './api/context.js'
+
+import Layout from './components/layout.js'
+import Films from './components/films.js'
 
 function App() {
+  const identity = useNetlifyIdentity('https://kind-payne-6a3c49.netlify.com')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <IdentityContext.Provider value={identity}>
+        <Layout>
+          <Router>
+            <Films path='/' />
+          </Router>
+        </Layout>
+      </IdentityContext.Provider>
     </div>
-  );
+  )
+}
+
+function PublicRoute(props) {
+  return <div className='container--l mxa p1 outer'> {
+    props.children
+  } </div>
 }
 
 export default App;

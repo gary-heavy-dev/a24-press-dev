@@ -1,0 +1,35 @@
+.outer {
+  padding: 3rem 1.5em;
+
+  @media (--600) {
+    padding: 3rem 3em;
+  }
+}
+
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  &--xs {
+    max-width: 500px;
+  }
+  &--s {
+    max-width: 740px;
+  }
+  &--m {
+    max-width: 1000px;
+  }
+  &--l {
+    max-width: 1200px;
+  }
+  &--xl {
+    max-width: 1600px;
+  }
+}
+
+.p15 {
+  padding: 1.5rem;
+}
+
+.py15 { padding-top: 1.5rem; }
+.py15 { padding-bottom: 1.5rem; }
