@@ -33,6 +33,7 @@ function App() {
   const identity = useNetlifyIdentity('https://kind-payne-6a3c49.netlify.com')
   return (
     <div className="App">
+    <link rel="stylesheet" href="https://use.typekit.net/ewm3ygz.css" />
       <IdentityContext.Provider value={identity}>
         <Layout>
           <Router>
