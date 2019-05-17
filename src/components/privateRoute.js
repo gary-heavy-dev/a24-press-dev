@@ -24,6 +24,13 @@ class PrivateRoute extends React.Component {
       })
     }
   }
+  componentWillReceiveProps () {
+    if (this.context.isLoggedIn) {
+      this.setState({
+        loggedIn: true
+      })
+    }
+  }
   render() {
     const { isLoggedIn } = this.context
     let { as: Comp, ...rest } = this.props

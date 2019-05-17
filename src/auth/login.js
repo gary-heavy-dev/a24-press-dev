@@ -15,6 +15,7 @@ function Login(props) {
           <form
             ref={formRef}
             onSubmit={e => {
+              console.log('hey?')
               e.preventDefault()
               const email = e.target.email.value
               const password = e.target.password.value
