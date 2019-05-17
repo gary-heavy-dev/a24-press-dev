@@ -23,7 +23,8 @@
     "watch:css": "postcss src/styles/main.css -w -o src/index.css",
     "start": "npm-run-all -p watch:css start-js",
     "start-js": "react-scripts start",
-    "build": "react-scripts build",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build:css build-js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
