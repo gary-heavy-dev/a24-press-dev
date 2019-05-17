@@ -1,3 +1,5 @@
+const p = process.env.NODE_ENV === 'production'
+
 module.exports = {
   plugins: [
     require('postcss-import'),
@@ -6,6 +8,6 @@ module.exports = {
     require('postcss-calc'),
     require('postcss-discard-comments'),
     require('postcss-reporter'),
-    require('autoprefixer'),
-  ],
+    p ? require('cssnano') : ''
+  ]
 }

@@ -1,23 +1,24 @@
-.films {
-  &__header {
-    border-bottom: 1px solid rgba(255,255,255, 0.4);
+.films__header {
+  border-bottom: 1px solid rgba(255,255,255, 0.4);
+}
+
+.films__row {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: rgba(255,255,255, 0.05);
+  border-bottom: 1px solid rgba(255,255,255, 0.4);
+}
+
+.films__row:hover {
+  background-color: rgba(255,255,255, 0.2);
+  svg {
+    transform: translateX(5px);
   }
-  &__row {
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    background-color: rgba(255,255,255, 0.05);
-    border-bottom: 1px solid rgba(255,255,255, 0.4);
-    svg {
-      transition: all 0.3s ease-in-out;
-      width: 46px;
-    }
-    &:hover {
-      background-color: rgba(255,255,255, 0.2);
-      svg {
-        transform: translateX(5px);
-      }
-    }
-  }
+}
+
+.films__row  svg {
+  transition: all 0.3s ease-in-out;
+  width: 46px;
 }
 
 .film {

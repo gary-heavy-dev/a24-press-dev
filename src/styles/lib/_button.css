@@ -5,8 +5,9 @@
   color: white;
   padding: 1rem 2rem;
   cursor: pointer;
-  &:hover {
-    background-color: white;
-    color: black;
-  }
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
 }

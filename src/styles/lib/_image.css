@@ -1,26 +1,28 @@
-.image {
-  &__block {
-    &.background {
-      background-color: rgba(255,249,236, 0.5);
-    }
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-    &.is-visible {
-      opacity: 1;
-      transform: translateY(0px);
-    }
-    img {
-      transition: all 0.3s ease-in-out;
-      transition-delay: 0s;
-      opacity: 0;
-      object-fit: cover;
-      object-position: center center;
-      &.is-visible {
-        transform: translateY(0px);
-        opacity: 1;
-      }
-    }
-  }
+.image__block {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.image__block img {
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0s;
+  opacity: 0;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.image__block img.is-visible {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.image__block.is-visible {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.image__block.background {
+  background-color: rgba(255,249,236, 0.5);
 }
 
 .is-visible img {

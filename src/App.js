@@ -3,13 +3,14 @@ import {
   Router
 } from '@reach/router'
 
-import './styles/main.css'
+import './index.css'
 
 import { useNetlifyIdentity } from 'react-netlify-identity'
 import { IdentityContext } from './api/context.js'
 
 import Layout from './components/layout.js'
 import Films from './components/films.js'
+import Film from './components/film.js'
 
 function App() {
   const identity = useNetlifyIdentity('https://kind-payne-6a3c49.netlify.com')
@@ -19,6 +20,7 @@ function App() {
         <Layout>
           <Router>
             <Films path='/' />
+            <Film path='/films/:slug' />
           </Router>
         </Layout>
       </IdentityContext.Provider>
