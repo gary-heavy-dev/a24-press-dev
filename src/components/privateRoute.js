@@ -25,9 +25,9 @@ class PrivateRoute extends React.Component {
     }
   }
   componentWillReceiveProps () {
-    if (this.context.isLoggedIn) {
+    if (!this.context.isLoggedIn) {
       this.setState({
-        loggedIn: true
+        loggedIn: false
       })
     }
   }
