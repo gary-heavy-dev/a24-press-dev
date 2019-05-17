@@ -18,7 +18,9 @@ function Header() {
           <a href='/'
             onClick={event => {
               event.preventDefault()
-              logoutUser(() => navigate(`/login`))
+              logoutUser().then(() => {
+                navigate(`/login`)
+              })
             }}>Logout</a>)}
       </div>
     </header>
