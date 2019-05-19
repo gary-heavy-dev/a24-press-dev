@@ -43,7 +43,7 @@ function Login(props) {
             </div>
             <div className='mt pt1'>
               Don't have an account? <Link to='/signup' className='underline'>Sign Up</Link>
-              <div>or <Link to='/forgot' className='underline'>Forgot your password?</Link></div>
+              {/* <div>or <Link to='/forgot' className='underline'>Forgot your password?</Link></div> */}
             </div>
           </form>
         </div>

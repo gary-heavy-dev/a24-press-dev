@@ -15,6 +15,7 @@ import Films from './components/films.js'
 import Film from './components/film.js'
 
 import Login from './auth/login.js'
+import Signup from './auth/signup.js'
 
 initAuth()
 
@@ -40,6 +41,7 @@ function App() {
             <PrivateRoute path='/' as={Films} />
             <Film path='/films/:slug' />
             <Login path='/login' />
+            <AuthRoute as={Signup} path='/signup' />
           </Router>
         </Layout>
       </IdentityContext.Provider>
