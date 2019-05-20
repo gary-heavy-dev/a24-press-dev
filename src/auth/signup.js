@@ -41,18 +41,19 @@ function Signup() {
             <input className='auth__input x p1 mb1' required type="email" name="email" placeholder='Email' />
           </label>
         </div>
-        <div className='mb1'>
+        <div className=''>
           <label>
             <input className='auth__input x p1 mb1' required type="password" name="password" placeholder='Password' />
           </label>
         </div>
+
+        <div className='mb1'>
+          <label>
+            <input className='auth__input x p1 mb1' required type="text" name="publication" placeholder='Publication' />
+          </label>
+        </div>
         <div className='my05'>
           <span class='akz-e caps small mb1 inline-block'>Optional</span>
-        </div>
-        <div className=''>
-          <label>
-            <input className='auth__input x p1 mb1' type="text" name="publication" placeholder='Publication' />
-          </label>
         </div>
         <div className='mb1 pb1'>
           <label>
