@@ -25,6 +25,8 @@ function Signup() {
               astrochimp(mailChimpUrl, { EMAIL: email, PUBLICA: publication }, (err, data) => {
                 if (err) {
                   console.log(err)
+                } else {
+                  console.log('hey data', data)
                 }
               })
               navigate("/")

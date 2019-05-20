@@ -109,7 +109,7 @@ class Film extends React.Component {
                   {film.fileDownloads && (
                     <div>
                       <h5 className='akz-e caps mb0'>Downloads</h5>
-                      <div className='film__content-downloads container--xs f jcs aic'>
+                      <div className='film__content-downloads container--xs f fw jcs aic'>
                         {film.fileDownloads && film.fileDownloads.map(download => (
                           <div key={download._key} className='f film__content-single jcs aic'>
                             <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}`} className='f jcs film__link aic'>
