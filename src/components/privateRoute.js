@@ -37,7 +37,7 @@ class PrivateRoute extends React.Component {
         loggedIn: true
       })
       setTimeout(() => {
-        location.reload()
+        // location.reload()
       }, 400)
     }
   }
