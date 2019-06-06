@@ -25,7 +25,11 @@ class PrivateRoute extends React.Component {
       })
     }
 
-    netlifyIdentity.on('login', user => console.log('login', user));
+    netlifyIdentity.on('login', user => {
+      setTimeout(() => {
+        document.location.reload()
+      }, 1000)
+    })
   }
   componentWillReceiveProps () {
     if (this.context.user === undefined) {
