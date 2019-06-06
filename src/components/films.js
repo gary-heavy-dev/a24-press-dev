@@ -37,7 +37,6 @@ class Films extends React.Component {
       <div>
         <div>
           <div className='container--xs'>
-            <p>Below is a listing of both old and upcoming A24 Films. Feel free to download assets and use them however you'd like.</p>
           </div>
         </div>
         <div className='films__wrapper'>
