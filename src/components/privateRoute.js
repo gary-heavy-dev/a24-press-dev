@@ -7,6 +7,7 @@ import {
 } from "@reach/router"
 import Login from '../auth/login.js'
 import { IdentityContext } from '../api/context.js'
+import netlifyIdentity from 'netlify-identity-widget'
 
 
 class PrivateRoute extends React.Component {
@@ -23,6 +24,8 @@ class PrivateRoute extends React.Component {
         loggedIn: true
       })
     }
+
+    netlifyIdentity.on('login', user => console.log('login', user));
   }
   componentWillReceiveProps () {
     if (this.context.user === undefined) {
