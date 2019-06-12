@@ -31,7 +31,7 @@ function AuthRoute(props) {
 }
 
 function App() {
-  const identity = useNetlifyIdentity('https://a24press.netlify.com')
+  const identity = useNetlifyIdentity('https://press.a24films.com')
   return (
     <div className="App">
     <link rel="stylesheet" href="https://use.typekit.net/ewm3ygz.css" />
