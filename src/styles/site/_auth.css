@@ -11,4 +11,15 @@
     background-color: black;
     color: white;
   }
+  &__group {
+    max-width: 400px;
+  }
+  &__three {
+    width: calc(33% - 0.25rem);
+  }
+}
+
+select {
+  padding: 1rem;
+  height: 40px;
 }
