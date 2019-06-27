@@ -120,6 +120,20 @@ class Film extends React.Component {
                       </div>
                     </div>
                   )}
+                  {film.clipDownloads && (
+                    <div>
+                      <h5 className='akz-e caps mb0'>Clip Downloads</h5>
+                      <div className='film__content-downloads container--xs f fw jcs aic'>
+                        {film.clipDownloads && film.clipDownloads.map(download => (
+                          <div key={download._key} className='f film__content-single jcs aic'>
+                            <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}.zip`} className='f jcs film__link aic'>
+                              <IoIosCloudDownload /><h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
+                            </a>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {film.imagePreviews && (
                     <div className='film__images f fw jcs'>
                       {film.imagePreviews.map(single => (
