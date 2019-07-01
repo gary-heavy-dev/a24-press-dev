@@ -61,7 +61,8 @@ class Film extends React.Component {
       },
       fileDownloads[] {
         ...,
-        'download': file.asset->url
+        'download': file.asset->url,
+        'file': file.asset->
       }
     }`
     client
@@ -112,7 +113,7 @@ class Film extends React.Component {
                       <div className='film__content-downloads container--xs f fw jcs aic'>
                         {film.fileDownloads && film.fileDownloads.map(download => (
                           <div key={download._key} className='f film__content-single jcs aic'>
-                            <a href={download.fileUrl || `${download.download}?dl=${download.download}`} className='f jcs film__link aic'>
+                            <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}.${download.file.extension}`} className='f jcs film__link aic'>
                               <IoIosCloudDownload /><h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
                             </a>
                           </div>
