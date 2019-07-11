@@ -15,6 +15,7 @@ import Films from './components/films.js'
 import Film from './components/film.js'
 
 import Login from './auth/login.js'
+import Forgot from './auth/forgot.js'
 import Signup from './auth/signup.js'
 
 initAuth()
@@ -41,6 +42,7 @@ function App() {
             <PrivateRoute path='/' as={Films} />
             <Film path='/films/:slug' />
             <Login path='/login' />
+            <Forgot path='/forgot' />
             <AuthRoute as={Signup} path='/signup' />
           </Router>
         </Layout>

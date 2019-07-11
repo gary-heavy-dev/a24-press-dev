@@ -26,7 +26,6 @@ function Signup() {
           const zip = e.target.zip.value
           const country = e.target.country.value
 
-          console.log('hey address', country)
           const mailChimpUrl = `https://a24films.us14.list-manage.com/subscribe/post?u=d6a612d44078d0634d5fa0663&amp;id=2b211ff970`
           load(signupUser(email, password))
             .then(user => {
