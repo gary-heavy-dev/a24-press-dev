@@ -600,6 +600,7 @@ select{
 .modal__video{
     width:100%;
     max-width:900px;
+    padding:2rem;
   }
 .modal__close{
     color:black;
