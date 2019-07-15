@@ -3,9 +3,13 @@ import { Link } from '@reach/router'
 import sanityClient from '@sanity/client'
 import BlockContent from '@sanity/block-content-to-react'
 import {
-  IoIosCloudDownload
+  IoIosCloudDownload,
+  IoIosPlay,
+  IoMdClose
 } from 'react-icons/io'
 import cx from 'classnames'
+import MicroModal from 'micromodal'
+import Helmet from 'react-helmet'
 
 import Image from './image.js'
 
@@ -49,8 +53,6 @@ class Film extends React.Component {
     }
   }
   componentDidMount() {
-    console.log('taco')
-    console.log('this.prosp', this.props.slug)
     const queryFilm = `*[slug.current == '${this.props.slug}'] {
       ...,
       'image': poster.asset->url,
@@ -62,7 +64,14 @@ class Film extends React.Component {
       fileDownloads[] {
         ...,
         'download': file.asset->url,
-        'file': file.asset->
+        'file': file.asset->,
+        'image': vimeoImage.asset->url
+      },
+      clipDownloads[] {
+        ...,
+        'download': file.asset->url,
+        'file': file.asset->,
+        'image': vimeoImage.asset->url
       }
     }`
     client
@@ -75,6 +84,24 @@ class Film extends React.Component {
       .catch(err => {
         console.log('error', err)
       })
+  }
+  openModal(domModal) {
+    const Plyr = require('plyr')
+    MicroModal.show(domModal)
+    const videoPlayer = new Plyr(`#vimeo-${domModal}`, {
+      autopause: true,
+      vimeo: {
+        controls: true,
+        autoplay: false
+      }
+    })
+    this.setState({
+      video: videoPlayer
+    })
+  }
+  closeModal(domModal) {
+
+    MicroModal.close(domModal)
   }
   componentWillReceiveProps(props) {
     console.log('state updated?')
@@ -126,7 +153,36 @@ class Film extends React.Component {
                       <h5 className='akz-e caps mb0'>Clip Downloads</h5>
                       <div className='film__content-downloads container--xs f fw jcs aic'>
                         {film.clipDownloads && film.clipDownloads.map(download => (
-                          <div key={download._key} className='f film__content-single jcs aic'>
+                          <div key={download._key} className='film__content-single jcs aic'>
+                            {download.vimeoId && download.vimeoImage && (
+                              <div>
+                                <div className='rel film__video-preview mb05' data-micromodal-trigger={`${download.vimeoId}`} onClick={() => this.openModal(download.vimeoId)}>
+                                  <div className='abs z1 film__images-single-icon'>
+                                    <IoIosPlay />
+                                  </div>
+                                  <Image className='x object-fit' source={`${download.image}?w=400`} alt='' />
+                                </div>
+                                <div className='modal x f jcc aic' id={`${download.vimeoId}`} aria-hidden="true">
+                                  <div className='x' tabIndex="-1" data-micromodal-close>
+                                    <div className='x' role="dialog" aria-modal="true" aria-labelledby={`${download.vimeoId}-title`} >
+                                    
+                                      <div class='modal__video rel ma x' id={`${download.vimeoId}-content`}>
+                                        <button onClick={() => this.closeModal(download.vimeoId)} className='abs f jcc aic modal__close z1 right top ' aria-label="Close modal" data-micromodal-close>
+                                          <IoMdClose />
+                                        </button>
+                                        <div
+                                          id={`vimeo-${download.vimeoId}`}
+                                          className='js-film__preview film__preview'
+                                          data-plyr-provider="vimeo"
+                                          data-plyr-embed-id={download.vimeoId}
+                                          preload="true"
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                             <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}.zip`} className='f jcs film__link aic'>
                               <IoIosCloudDownload /><h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
                             </a>
@@ -136,16 +192,19 @@ class Film extends React.Component {
                     </div>
                   )}
                   {film.imagePreviews && (
-                    <div className='film__images f fw jcs'>
-                      {film.imagePreviews.map(single => (
-                        <div key={single.image} className='film__images-single mr1 mb1 rel'>
-                          <a className='abs top z2 left x y' href={`${single.image}?dl=${single._key}`} />
-                          <div className='abs z1 film__images-single-icon'>
-                            <IoIosCloudDownload />
+                    <div>
+                      <h5 className='akz-e caps mb0'>Image Downloads</h5>
+                      <div className='film__content-downloads film__images f fw jcs'>
+                        {film.imagePreviews.map(single => (
+                          <div key={single.image} className='film__images-single mr1 mb1 rel'>
+                            <a className='abs top z2 left x y' href={`${single.image}?dl=${single._key}`} />
+                            <div className='abs z1 film__images-single-icon'>
+                              <IoIosCloudDownload />
+                            </div>
+                            <Image className='x obj-fit' source={`${single.image}?w=400`} alt='' />
                           </div>
-                          <Image className='x obj-fit' source={`${single.image}?w=400`} alt='' />
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>

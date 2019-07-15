@@ -36,6 +36,7 @@ function App() {
   return (
     <div className="App">
     <link rel="stylesheet" href="https://use.typekit.net/ewm3ygz.css" />
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" />
       <IdentityContext.Provider value={identity}>
         <Layout>
           <Router>

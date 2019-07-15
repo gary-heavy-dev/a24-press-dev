@@ -84,6 +84,16 @@
       }
     }
   }
+  &__video-preview {
+    &:hover {
+      .image__block {
+        opacity: 0.5;
+      }
+      .film__images-single-icon {
+        opacity: 1;
+      }
+    }
+  }
   &__content {
     padding-top: 2rem;
     &-inner {
@@ -103,4 +113,37 @@
   &__poster {
     max-width: 30%;
   }
+  &__preview {
+    min-width: 50vw;
+    width: 100%;
+    max-width: 900px;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: rgba(0,0,0,0.5);
+  &__video {
+    width: 100%;
+    max-width: 900px;
+  }
+  &__close {
+    color: black;
+    background: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: none;
+    font-size: 30px;
+  }
+}
+
+.modal.is-open {
+  display: flex;
 }
