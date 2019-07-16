@@ -100,8 +100,8 @@ class Film extends React.Component {
     })
   }
   closeModal(domModal) {
-
     MicroModal.close(domModal)
+    this.state.video.pause()
   }
   componentWillReceiveProps(props) {
     console.log('state updated?')

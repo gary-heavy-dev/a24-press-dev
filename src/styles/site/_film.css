@@ -148,3 +148,35 @@
 .modal.is-open {
   display: flex;
 }
+
+
+
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+  background: white !important;
+}
+
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+  background: white!important;
+}
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+  background: white!important;
+}
+
+.plyr__control--overlaid {
+  background: white !important;
+}
+
+.plyr--full-ui input[type=range] {
+  color: white !important;
+}
+.plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+  color: black !important;
+}
+
+.plyr__control--overlaid {
+  color: black !important;
+}
+
+.plyr__control.plyr__tab-focus {
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.67) !important;
+}
