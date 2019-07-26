@@ -123,11 +123,15 @@ class Film extends React.Component {
             <div className='x py1 film__content'>
               <div className='f jcb ais'>
                 <div className='rel x film__poster'>
-                  <a className='abs top z2 left x y' href={`${film.image}?dl=${film.poster.asset._ref}`} />
-                  <div className='abs z1 film__images-single-icon'>
-                    <IoIosCloudDownload />
-                  </div>
-                  <Image className='x obj-fit' source={film.image} imageId={film.poster.asset._ref} size={400} alt={film.title} />
+                  {film.image && (
+                    <React.Fragment>
+                      <a className='abs top z2 left x y' href={`${film.image}?dl=${film.poster.asset._ref}`} />
+                      <div className='abs z1 film__images-single-icon'>
+                        <IoIosCloudDownload />
+                      </div>
+                      <Image className='x obj-fit' source={film.image} imageId={film.poster.asset._ref} size={400} alt={film.title} />
+                    </React.Fragment>
+                  )}
                 </div>
                 <div className='film__content-inner x px1'>
                   <h3 className='m0 p0'>{film.title}</h3>
