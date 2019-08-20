@@ -17,6 +17,7 @@ import Film from './components/film.js'
 import Login from './auth/login.js'
 import Forgot from './auth/forgot.js'
 import Signup from './auth/signup.js'
+import Terms from './pages/terms.js'
 
 initAuth()
 
@@ -44,6 +45,7 @@ function App() {
             <Film path='/films/:slug' />
             <Login path='/login' />
             <Forgot path='/forgot' />
+            <Terms path='/terms' />
             <AuthRoute as={Signup} path='/signup' />
           </Router>
         </Layout>
