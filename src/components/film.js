@@ -197,14 +197,10 @@ class Film extends React.Component {
                   )}
                   {film.imagePreviews && (
                     <div>
-                      <h5 className='akz-e caps mb0'>Image Downloads</h5>
+                      <h5 className='akz-e caps mb0'>Image Previews</h5>
                       <div className='film__content-downloads film__images f fw jcs'>
                         {film.imagePreviews.map(single => (
                           <div key={single.image} className='film__images-single mr1 mb1 rel'>
-                            <a className='abs top z2 left x y' href={`${single.image}?dl=${single._key}`} />
-                            <div className='abs z1 film__images-single-icon'>
-                              <IoIosCloudDownload />
-                            </div>
                             <Image className='x obj-fit' source={`${single.image}?w=400`} alt='' />
                           </div>
                         ))}
