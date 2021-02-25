@@ -10,12 +10,13 @@ import {
 import cx from 'classnames'
 import MicroModal from 'micromodal'
 import Helmet from 'react-helmet'
+import Environment from '../util/environment.js'
 
 import Image from './image.js'
 
 const client = sanityClient({
   projectId: 'xq1bjtf4',
-  dataset: 'production',
+  dataset: Environment(),
   useCdn: false // `false` if you want to ensure fresh data
 })
 

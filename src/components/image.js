@@ -1,11 +1,15 @@
 import React from 'react'
 import vsbl from 'vsbl'
 import cx from 'classnames'
+import Environment from '../util/environment.js'
 
 import Img from 'gatsby-image'
 import { getFluidGatsbyImage } from 'gatsby-source-sanity'
 
-const sanityConfig = { projectId: 'xq1bjtf4', dataset: 'production' }
+const sanityConfig = {
+  projectId: 'xq1bjtf4',
+  dataset: Environment(), // get dataset based on current environment
+}
 
 class Image extends React.Component {
   constructor(props) {

@@ -1,10 +1,11 @@
 import React from 'react'
 import sanityClient from '@sanity/client'
 import FilmRow from './filmRow.js'
+import Environment from '../util/environment.js'
 
 const client = sanityClient({
   projectId: 'xq1bjtf4',
-  dataset: 'production',
+  dataset: Environment(), // get dataset based on current environment
   useCdn: false // `false` if you want to ensure fresh data
 })
 const queryFilms = `*[_type == "movie"] | order(releaseDate desc)`
