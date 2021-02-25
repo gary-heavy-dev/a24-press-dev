@@ -4,7 +4,7 @@
   status = 200
 
 [context.production]
-  environment = { TYPE = 'production' }
+  environment = { REACT_APP_TYPE = 'production' }
 
 [context.staging]
-  environment = { TYPE = 'staging' }
+  environment = { REACT_APP_TYPE = 'staging' }

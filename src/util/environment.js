@@ -3,10 +3,10 @@
 // 3. If TYPE has been set only use the 'production' dataset if we're in production.
 
 function Environment() {
-  if (process.env.CONTEXT !== 'production') {
-    return 'staging'
-  } else {
+  if (process.env.REACT_APP_TYPE == 'production') {
     return 'production'
+  } else {
+    return 'staging'
   }
 }
 
