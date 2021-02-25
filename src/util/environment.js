@@ -6,7 +6,8 @@ function Environment() {
   if (process.env.TYPE != 'production') {
     return 'staging'
   } else {
-    return process.env.TYPE === 'production' ? 'production' : 'staging'
+    return 'production'
+    // return process.env.TYPE === 'production' ? 'production' : 'staging'
   }
 }
 
