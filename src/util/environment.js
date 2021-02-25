@@ -3,11 +3,10 @@
 // 3. If TYPE has been set only use the 'production' dataset if we're in production.
 
 function Environment() {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.CONTEXT !== 'production') {
     return 'staging'
   } else {
-    // return 'production'
-    return process.env.TYPE
+    return 'production'
   }
 }
 
