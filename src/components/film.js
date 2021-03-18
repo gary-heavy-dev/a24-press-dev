@@ -122,7 +122,7 @@ class Film extends React.Component {
               </Link>
             </div>
             <div className='x py1 film__content'>
-              <div className='f jcb ais'>
+              <div className='f jcb ais film__wrapper'>
                 <div className='rel x film__poster'>
                   {film.image && (
                     <React.Fragment>
