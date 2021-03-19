@@ -11,7 +11,7 @@ import cx from 'classnames'
 import MicroModal from 'micromodal'
 import Helmet from 'react-helmet'
 import Environment from '../util/environment.js'
-
+import spacetime from 'spacetime'
 import Image from './image.js'
 
 const client = sanityClient({
@@ -139,13 +139,16 @@ class Film extends React.Component {
                   <div className='container--xs'>
                     <BlockContent blocks={film.overview} />
                   </div>
-                  {film.previewDate && (
+                  {film.previewDates || film.releaseDate && (
                     <div>
                       <h5 className='akz-e caps mb0'>Release Date</h5>
                       <div className='film__content-dates container--xs'>
-                        {film.previewDate && film.previewDate.split(';').map(date => (
-                          <p className="film__content-date">{date}</p>
-                        ))}
+                        {!film.previewDates
+                          ? (<p className='film__content-date'>{spacetime(film.releaseDate).dayName()} {spacetime(film.releaseDate).monthName()} {spacetime(film.releaseDate).date()} {spacetime(film.releaseDate).year()}</p>)
+                          : (<p className='film__content-date'>{film.previewDates && film.previewDates.map(date => (
+                            <span>{date}</span>
+                          ))}</p>)
+                        }
                       </div>
                     </div>
                   )}

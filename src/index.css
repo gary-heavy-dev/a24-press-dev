@@ -604,7 +604,8 @@ select{
     }
 .film__content-date{
       display:block;
-      margin:0
+      margin:0;
+      text-transform:uppercase;
     }
 .film__poster{
     max-width:30%;
