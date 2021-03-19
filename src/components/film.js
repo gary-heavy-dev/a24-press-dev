@@ -134,7 +134,7 @@ class Film extends React.Component {
                     </React.Fragment>
                   )}
                 </div>
-                <div className='film__content-inner x px1'>
+                <div className='film__content-inner x'>
                   <h3 className='m0 p0'>{film.title}</h3>
                   <div className='container--xs'>
                     <BlockContent blocks={film.overview} />
