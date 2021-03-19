@@ -137,7 +137,6 @@
     &-date {
       display: block;
       margin: 0;
-      text-transform: uppercase;
     }
   }
   &__poster {
