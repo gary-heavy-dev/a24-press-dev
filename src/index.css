@@ -588,6 +588,15 @@ select{
       padding-top:1rem;
       border-top:1px solid rgba(255, 255, 255, .3);
     }
+.film__content-dates{
+      margin-top:1rem;
+      padding-top:1rem;
+      border-top:1px solid rgba(255, 255, 255, .3);
+    }
+.film__content-date{
+      display:block;
+      margin:0
+    }
 .film__poster{
     max-width:30%;
   }

@@ -116,6 +116,15 @@
       padding-top: 1rem;
       border-top: 1px solid rgba(255,255,255,0.3);
     }
+    &-dates {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.3);
+    }
+    &-date {
+      display: block;
+      margin: 0
+    }
   }
   &__poster {
     max-width: 30%;

@@ -139,6 +139,16 @@ class Film extends React.Component {
                   <div className='container--xs'>
                     <BlockContent blocks={film.overview} />
                   </div>
+                  {film.previewDate && (
+                    <div>
+                      <h5 className='akz-e caps mb0'>Release Date</h5>
+                      <div className='film__content-dates container--xs'>
+                        {film.previewDate && film.previewDate.split(';').map(date => (
+                          <p className="film__content-date">{date}</p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {film.fileDownloads && (
                     <div>
                       <h5 className='akz-e caps mb0'>Downloads</h5>
