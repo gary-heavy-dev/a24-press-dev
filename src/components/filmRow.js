@@ -21,7 +21,9 @@ class FilmRow extends React.Component {
         <div className='mr05'>
           {!previewDate
             ? (<h4 className='small caps m0 p0 akz-e'>{date.dayName()} {date.monthName()} {date.date()} {date.year()}</h4>)
-            : (<h4 className='small caps m0 p0 akz-e'>{previewDate}</h4>)
+            : (<h4 className='films__row-date small caps m0 p0 akz-e'>{previewDate && previewDate.split(';').map(date => (
+              <span>{date}</span>
+            ))}</h4>)
           }
         </div>
       </div>
