@@ -9,11 +9,13 @@ import {
 } from 'react-icons/io'
 import cx from 'classnames'
 import MicroModal from 'micromodal'
-import Helmet from 'react-helmet'
 import Environment from '../util/environment.js'
 import spacetime from 'spacetime'
 import Image from './image.js'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import SwiperCore, { Thumbs, Navigation, A11y} from 'swiper'
 
+SwiperCore.use([Thumbs, Navigation, A11y]);
 const client = sanityClient({
   projectId: 'xq1bjtf4',
   dataset: Environment(),
@@ -47,12 +49,14 @@ class Loading extends React.Component {
 }
 
 class Film extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      film: null
+      film: null,
+      thumbsSwiper: null
     }
   }
+
   componentDidMount() {
     const queryFilm = `*[slug.current == '${this.props.slug}'] {
       ...,
@@ -107,10 +111,19 @@ class Film extends React.Component {
   componentWillReceiveProps(props) {
     console.log('state updated?')
   }
+  
   render() {
     const {
-      film
+      film,
+      thumbsSwiper
     } = this.state
+
+    const setThumbsSwiper = (val) => {
+      console.log('setting thumb')
+      console.log(val)
+      this.state.thumbsSwiper = val
+      console.log (this.state)
+    }
     return (
       <div>
         {film ? (
@@ -134,7 +147,7 @@ class Film extends React.Component {
                     </React.Fragment>
                   )}
                 </div>
-                <div className='film__content-inner x'>
+                <div className='film__content-inner'>
                   <h3 className='m0 p0'>{film.title}</h3>
                   <div className='container--xs'>
                     <BlockContent blocks={film.overview} />
@@ -184,7 +197,7 @@ class Film extends React.Component {
                                   <div className='x' tabIndex="-1" data-micromodal-close>
                                     <div className='x' role="dialog" aria-modal="true" aria-labelledby={`${download.vimeoId}-title`} >
                                     
-                                      <div class='modal__video rel ma x' id={`${download.vimeoId}-content`}>
+                                      <div className='modal__video rel ma x' id={`${download.vimeoId}-content`}>
                                         <button onClick={() => this.closeModal(download.vimeoId)} className='abs f jcc aic modal__close z1 right top ' aria-label="Close modal" data-micromodal-close>
                                           <IoMdClose />
                                         </button>
@@ -210,16 +223,42 @@ class Film extends React.Component {
                     </div>
                   )}
                   {film.imagePreviews && (
-                    <div>
-                      <h5 className='akz-e caps mb0'>Image Previews</h5>
-                      <div className='film__content-downloads film__images f fw jcs'>
-                        {film.imagePreviews.map(single => (
-                          <div key={single.image} className='film__images-single mr1 mb1 rel'>
+                  <div>
+                    <h5 className='akz-e caps mb0'>Image Previews</h5>
+                    <div className='film__content-downloads film__images f fw jcs'>
+                      <Swiper 
+                        onSwiper={setThumbsSwiper}
+                        watchSlidesVisibility
+                        watchSlidesProgress
+                        slideToClickedSlide={true}
+                        slidesPerView={4}
+                        navigation
+                        spaceBetween={15}
+                        className="film__images-container film__images-container--slide-auto"
+                      >
+                      {film.imagePreviews.map((single, idx) => (
+                          <SwiperSlide key={idx} className='film__images-single swiper-slide-auto'>
                             <Image className='x obj-fit' source={`${single.image}?w=400`} alt='' />
-                          </div>
+                          </SwiperSlide>
                         ))}
-                      </div>
+                      </Swiper>
+                      <Swiper 
+                        id="main"
+                        tag="section"
+                        thumbs={{swiper: thumbsSwiper}}
+                        navigation
+                        slidesPerView={1.3}
+                        spaceBetween={15}
+                        className="film__images-container film__images-container--slide"
+                      >
+                        {film.imagePreviews.map((single, idx) => (
+                          <SwiperSlide key={idx} className='film__images-single'>
+                              <Image className='x obj-fit' source={`${single.image}?w=700`} alt='' />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
                     </div>
+                  </div>
                   )}
                 </div>
               </div>
