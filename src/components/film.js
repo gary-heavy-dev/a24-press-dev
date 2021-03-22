@@ -119,10 +119,9 @@ class Film extends React.Component {
     } = this.state
 
     const setThumbsSwiper = (val) => {
-      console.log('setting thumb')
-      console.log(val)
-      this.state.thumbsSwiper = val
-      console.log (this.state)
+      this.setState({
+        thumbsSwiper: val
+      })
     }
     return (
       <div>
