@@ -114,8 +114,15 @@
       border-top: 1px solid rgba(255,255,255,0.3);
     }
     &-date {
-      display: block;
-      margin: 0;
+      margin-top: 0;
+
+      span {
+        display: block;
+      }
+      &--preview {
+        opacity: 1;
+        color: var(--white);
+      }
     }
   }
 

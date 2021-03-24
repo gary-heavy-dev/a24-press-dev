@@ -583,9 +583,15 @@ select{
       border-top:1px solid rgba(255, 255, 255, .3);
     }
 .film__content-date{
-      display:block;
-      margin:0;
+      margin-top:0;
     }
+.film__content-date span{
+        display:block;
+      }
+.film__content-date--preview{
+        opacity:1;
+        color:var(--white);
+      }
 .film__images{
     margin-top:30px;
     max-width:700px;
