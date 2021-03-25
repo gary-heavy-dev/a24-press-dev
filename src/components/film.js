@@ -153,16 +153,11 @@ class Film extends React.Component {
                   </div>
                   {(film.releaseDate || film.previewDates) && (
                     <div>
-                      <h5 className='akz-e caps mb0'>
-                      {!film.previewDates
-                          ? ('Release Date')
-                          : ('Preview Date')
-                        }
-                      </h5>
+                      <h5 className='akz-e caps mb0'>Release Date</h5>
                       <div className='film__content-dates container--xs'>
                         {!film.previewDates
-                          ? (<p className='film__content-date film__content-date--release akz-e caps'>{spacetime(film.releaseDate).year()}-{spacetime(film.releaseDate).month()}-{spacetime(film.releaseDate).day()} {spacetime(film.releaseDate).time()} </p>)
-                          : (<p className='film__content-date film__content-date--preview akz-e'>{film.previewDates && film.previewDates.map(date => (
+                          ? (<p className='film__content-date film__content-date--release caps'>{spacetime(film.releaseDate).year()}-{spacetime(film.releaseDate).month()}-{spacetime(film.releaseDate).day()} {spacetime(film.releaseDate).time()} </p>)
+                          : (<p className='film__content-date film__content-date--preview'>{film.previewDates && film.previewDates.map(date => (
                             <span>{date}</span>
                           ))}</p>)
                         }
