@@ -592,6 +592,9 @@ select{
         opacity:1;
         color:var(--white);
       }
+.film__content-date--release{
+        text-transform:capitalize;
+      }
 .film__images{
     margin-top:30px;
     max-width:700px;

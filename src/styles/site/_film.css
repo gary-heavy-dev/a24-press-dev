@@ -123,6 +123,9 @@
         opacity: 1;
         color: var(--white);
       }
+      &--release {
+        text-transform: capitalize;
+      }
     }
   }
 
