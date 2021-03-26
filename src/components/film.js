@@ -167,7 +167,7 @@ class Film extends React.Component {
                   {film.fileDownloads && (
                     <div>
                       <h5 className='akz-e caps mb0'>Downloads</h5>
-                      <div className='film__content-downloads container--xs f fw jcs aic'>
+                      <div className='film__content-downloads container--xs f fw jcb aic'>
                         {film.fileDownloads && film.fileDownloads.map(download => (
                           <div key={download._key} className='f film__content-single jcs aic'>
                             {!download.fileUrl
@@ -188,7 +188,7 @@ class Film extends React.Component {
                   {film.clipDownloads && (
                     <div>
                       <h5 className='akz-e caps mb0'>Clip Downloads</h5>
-                      <div className='film__content-downloads container--xs f fw jcs aic'>
+                      <div className='film__content-downloads container--xs f fw jcb aic'>
                         {film.clipDownloads && film.clipDownloads.map(download => (
                           <div key={download._key} className='film__content-single jcs aic'>
                             {download.vimeoId && download.vimeoImage && (
@@ -231,13 +231,14 @@ class Film extends React.Component {
                   {film.imagePreviews && (
                   <div>
                     <h5 className='akz-e caps mb0'>Image Previews</h5>
-                    <div className='film__content-downloads film__images f fw jcs'>
+                    <div className='film__content-downloads film__images f fw jcb'>
                       <Swiper 
                         onSwiper={setThumbsSwiper}
                         watchSlidesVisibility
                         watchSlidesProgress
+                        loop={true}
                         slideToClickedSlide={true}
-                        slidesPerView={4}
+                        slidesPerView={5}
                         navigation
                         spaceBetween={15}
                         className="film__images-container film__images-container--slide-auto"
@@ -251,6 +252,7 @@ class Film extends React.Component {
                       <Swiper 
                         id="main"
                         tag="section"
+                        loop={true}
                         thumbs={{swiper: thumbsSwiper}}
                         navigation
                         slidesPerView={1.3}
