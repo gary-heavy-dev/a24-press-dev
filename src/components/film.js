@@ -240,6 +240,7 @@ class Film extends React.Component {
                         slideToClickedSlide={true}
                         slidesPerView={5}
                         navigation
+                        threshold={4}
                         spaceBetween={15}
                         className="film__images-container film__images-container--slide-auto"
                       >
@@ -255,13 +256,22 @@ class Film extends React.Component {
                         loop={true}
                         thumbs={{swiper: thumbsSwiper}}
                         navigation
+                        threshold={4}
                         slidesPerView={1.3}
                         spaceBetween={15}
                         className="film__images-container film__images-container--slide"
                       >
                         {film.imagePreviews.map((single, idx) => (
                           <SwiperSlide key={idx} className='film__images-single'>
+                            <div>
                               <Image className='x obj-fit' source={`${single.image}?w=700`} alt='' />
+                              <div className="download-link">
+                                <a href={`${single.image}?dl=${single.image}`} className="f jcs film__link aic">
+                                  <IoIosCloudDownload />
+                                  <h5 className='m0 p0 ml05'>Download Image</h5>
+                                </a>
+                              </div>
+                            </div>
                           </SwiperSlide>
                         ))}
                       </Swiper>

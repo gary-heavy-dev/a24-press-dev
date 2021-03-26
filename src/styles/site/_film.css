@@ -153,7 +153,21 @@
         height: 14px;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%;)
+        transform: translate(-50%, -50%);
+      }
+
+      .download-link {
+        float: right;
+        padding-top: 10px;
+
+        svg {
+          max-height: 14px;
+          max-width: 14px;
+        }
+
+        a > * {
+          display: inline-block;
+        }
       }
     }
 
@@ -234,7 +248,7 @@
 .swiper-button-next,
 .swiper-button-prev {
   width: 90px;
-  height: 100%;
+  height: calc(100% - 28px);
   position: absolute;
   top: 0;
   cursor: pointer;

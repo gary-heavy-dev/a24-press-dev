@@ -617,8 +617,19 @@ select{
         height:14px;
         left:50%;
         top:50%;
-        transform:translate(-50%, -50%;)
+        transform:translate(-50%, -50%);
       }
+.film__images-single .download-link{
+        float:right;
+        padding-top:10px;
+      }
+.film__images-single .download-link svg{
+          max-height:14px;
+          max-width:14px;
+        }
+.film__images-single .download-link a > *{
+          display:inline-block;
+        }
 .film__images-container--slide .film__images-single:hover .image__block{
           opacity:1;
         }
@@ -683,7 +694,7 @@ select{
 .swiper-button-next,
 .swiper-button-prev{
   width:90px;
-  height:100%;
+  height:calc(100% - 28px);
   position:absolute;
   top:0;
   cursor:pointer;
