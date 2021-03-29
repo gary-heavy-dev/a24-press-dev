@@ -236,7 +236,7 @@ class Film extends React.Component {
                         onSwiper={setThumbsSwiper}
                         watchSlidesVisibility
                         watchSlidesProgress
-                        loop={true}
+                        loop={film.imagePreviews.length > 5 ? true : false}
                         slideToClickedSlide={true}
                         slidesPerView={5}
                         navigation
@@ -253,11 +253,11 @@ class Film extends React.Component {
                       <Swiper 
                         id="main"
                         tag="section"
-                        loop={true}
+                        loop={film.imagePreviews.length > 1 ? true : false }
                         thumbs={{swiper: thumbsSwiper}}
                         navigation
                         threshold={4}
-                        slidesPerView={1.3}
+                        slidesPerView={film.imagePreviews.length > 1 ? 1.3 : 1}
                         spaceBetween={15}
                         className="film__images-container film__images-container--slide"
                       >

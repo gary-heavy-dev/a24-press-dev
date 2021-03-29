@@ -100,7 +100,7 @@ a {
 }
 
 p, .p, .article ul, .article ol, .standard__text li,
-.article h2, .article h3 {
+.article h2, .article h3, p span {
   opacity: 0.7;
 }
 

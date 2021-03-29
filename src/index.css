@@ -200,7 +200,7 @@ a:hover{
       transform:translateY(-3px);
     }
 p, .p, .article ul, .article ol, .standard__text li,
-.article h2, .article h3{
+.article h2, .article h3, p span{
   opacity:0.7;
 }
 .terms__single ul, .terms__single ol{
