@@ -622,6 +622,8 @@ select{
 .film__images-single .download-link{
         float:right;
         padding-top:10px;
+        opacity:0;
+        transition:opacity 0.5s linear;
       }
 .film__images-single .download-link svg{
           max-height:14px;
@@ -630,17 +632,30 @@ select{
 .film__images-single .download-link a > *{
           display:inline-block;
         }
+.film__images-container--slide .film__images-single{
+          width:100%;
+        }
 .film__images-container--slide .film__images-single.swiper-slide{
-            max-height:385px;
+            max-height:507px;
           }
-.film__images-container--slide .film__images-single.swiper-slide > div,
-            .film__images-container--slide .film__images-single.swiper-slide .image__block{
+.film__images-container--slide .film__images-single.swiper-slide .slide__inner{
+              height:100%;
+              display:flex;
+              flex-direction:column;
+              align-items:flex-start;
+            }
+.film__images-container--slide .film__images-single.swiper-slide .image__block{
               height:100%;
             }
 .film__images-container--slide .film__images-single.swiper-slide .image__block img{
-              object-fit:contain;
-              object-position:left;
-            }
+                object-fit:contain;
+                object-position:left;
+                flex:1;
+                max-height:469px;
+              }
+.film__images-container--slide .film__images-single.swiper-slide-active .download-link{
+                opacity:1;
+              }
 .film__images-container--slide .film__images-single:hover .image__block{
             opacity:1;
           }
@@ -706,7 +721,7 @@ select{
 .swiper-button-next,
 .swiper-button-prev{
   width:90px;
-  height:calc(100% - 28px);
+  height:calc(100% - 28px) !important;
   position:absolute;
   top:0;
   cursor:pointer;
@@ -740,6 +755,11 @@ select{
     opacity:0.5;
     max-height:86px;
   }
+@media (max-width: 50em){
+.swiper-container-thumbs .swiper-slide{
+      max-height:60px
+  }
+    }
 .swiper-container-thumbs .swiper-slide-thumb-active{
       opacity:1;
     }

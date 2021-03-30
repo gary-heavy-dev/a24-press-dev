@@ -257,13 +257,13 @@ class Film extends React.Component {
                         thumbs={{swiper: thumbsSwiper}}
                         navigation
                         threshold={4}
-                        slidesPerView={film.imagePreviews.length > 1 ? 1.3 : 1}
+                        slidesPerView={film.imagePreviews.length > 1 ? 1 : 1}
                         spaceBetween={15}
                         className="film__images-container film__images-container--slide"
                       >
                         {film.imagePreviews.map((single, idx) => (
                           <SwiperSlide key={idx} className='film__images-single'>
-                            <div>
+                            <div className='slide__inner'>
                               <Image className='x obj-fit' source={`${single.image}?w=700`} alt='' />
                               <div className="download-link">
                                 <a href={`${single.image}?dl=${single.image}`} className="f jcs film__link aic">
