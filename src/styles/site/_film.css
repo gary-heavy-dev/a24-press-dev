@@ -173,14 +173,32 @@
 
     &-container {
       &--slide {
-        .film__images-single:hover .image__block {
-          opacity: 1;
+        .film__images-single {
+          
+          &.swiper-slide {
+            max-height: 385px;
+
+            > div,
+            .image__block {
+              height: 100%;
+            }
+
+            .image__block img {
+              object-fit: contain;
+              object-position: left;
+            }
+          }
+
+          &:hover .image__block {
+            opacity: 1;
+          }
         }
 
         .swiper-button-next,
         .swiper-button-prev {
           opacity: 0;
           transition: opacity 0.2s ease-out;
+          height: 100%;
 
           &:hover {
             opacity: 1;
@@ -286,6 +304,7 @@
 
   .swiper-slide {
     opacity: 0.5;
+    max-height: 86px;
 
     &-thumb-active {
       opacity: 1;
