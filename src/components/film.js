@@ -167,7 +167,7 @@ class Film extends React.Component {
                   {film.fileDownloads && (
                     <div>
                       <h5 className='akz-e caps mb0'>Downloads</h5>
-                      <div className='film__content-downloads container--xs f fw jcb aic'>
+                      <div className='film__content-downloads film__download container--xs f fw jcs aic'>
                         {film.fileDownloads && film.fileDownloads.map(download => (
                           <div key={download._key} className='f film__content-single jcs aic'>
                             {!download.fileUrl
@@ -232,7 +232,7 @@ class Film extends React.Component {
                   {film.imagePreviews && (
                   <div>
                     <h5 className='akz-e caps mb0'>Image Previews</h5>
-                    <div className='film__content-downloads film__images f fw jcb'>
+                    <div className='film__images f fw jcs'>
                       <Swiper 
                         onSwiper={setThumbsSwiper}
                         watchSlidesVisibility
