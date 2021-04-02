@@ -46,6 +46,9 @@
     &:hover {
       border-bottom: 1px solid white;
     }
+    .film__clips & {
+      margin-top: 5px;
+    }
   }
   &__single {
     opacity: 0;
@@ -101,7 +104,20 @@
       }
     }
     &-single {
-      width: 31.333%;
+      width: calc(33.333% - 10px);
+      
+
+      @media (--800) {
+        width: calc(50% - 5px);
+      }
+
+      &-inner {
+        position: relative;
+        padding-top: calc((88/166) * 100%);
+      }
+      &--clip {
+        margin-top: 1rem;
+      }
     }
     &-downloads {
       margin-top: 1rem;
@@ -115,7 +131,6 @@
     }
     &-date {
       margin-top: 0;
-
       span {
         display: block;
       }
@@ -278,6 +293,25 @@
   }
   &__images-slide {
     width: 100%;
+  }
+  &__video-preview {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__clips {
+    justify-content: space-between;
+    padding-top: 0;
+  }
+  &__icon-download {
+    min-width: 14px;
+    min-height: 14px;
+    margin-top: 3px;
   }
 }
 

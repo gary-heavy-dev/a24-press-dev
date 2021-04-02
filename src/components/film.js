@@ -188,12 +188,12 @@ class Film extends React.Component {
                   {film.clipDownloads && (
                     <div>
                       <h5 className='akz-e caps mb0'>Clip Downloads</h5>
-                      <div className='film__content-downloads container--xs f fw jcb aic'>
+                      <div className='film__content-downloads film__clips container--xs f fw'>
                         {film.clipDownloads && film.clipDownloads.map(download => (
-                          <div key={download._key} className='film__content-single jcs aic'>
+                          <div key={download._key} className='film__content-single film__content-single--clip jcs aic'>
                             {download.vimeoId && download.vimeoImage && (
-                              <div>
-                                <div className='rel film__video-preview mb05' data-micromodal-trigger={`${download.vimeoId}`} onClick={() => this.openModal(download.vimeoId)}>
+                              <div className="film__content-single-inner">
+                                <div className='film__video-preview' data-micromodal-trigger={`${download.vimeoId}`} onClick={() => this.openModal(download.vimeoId)}>
                                   <div className='abs z1 film__images-single-icon'>
                                     <IoIosPlay />
                                   </div>
@@ -220,8 +220,9 @@ class Film extends React.Component {
                                 </div>
                               </div>
                             )}
-                            <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}.zip`} className='f jcs film__link aic'>
-                              <IoIosCloudDownload /><h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
+                            <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}.zip`} className='f jcs film__link ais'>
+                              <IoIosCloudDownload className="film__icon-download" />
+                              <h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
                             </a>
                           </div>
                         ))}
