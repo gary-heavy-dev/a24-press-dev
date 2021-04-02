@@ -10,12 +10,67 @@
     border: 1px solid rgba(255,255,255,0.2);
     background-color: black;
     color: white;
+
+    &-checkbox {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      margin: 0;
+      cursor: pointer;
+
+      &:checked {
+       & + .auth__checkmark::after {
+          display: block;
+        }
+      }
+    }
   }
   &__group {
     max-width: 400px;
   }
   &__three {
     width: calc(33% - 0.25rem);
+  }
+
+  &__label {
+    color: currentColor;
+    opacity: 0.8; 
+
+    &--checkbox {
+      display: inline-block;
+      position: relative;
+      padding-left: 30px;
+      user-select: none;
+      cursor: pointer;
+    }
+  }
+
+  &__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(255,255,255,0.8);
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: 7px;
+      top: 3px;
+      width: 7px;
+      height: 12px;
+      border: solid var(--black);
+      border-width: 0 2px 2px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
   }
 }
 

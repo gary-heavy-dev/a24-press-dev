@@ -25,6 +25,7 @@ function Signup() {
           const state = e.target.state.value
           const zip = e.target.zip.value
           const country = e.target.country.value
+          const join = e.target.join.checked    
 
           const mailChimpUrl = `https://a24films.us14.list-manage.com/subscribe/post?u=d6a612d44078d0634d5fa0663&amp;id=2b211ff970`
           load(signupUser(email, password))
@@ -39,16 +40,19 @@ function Signup() {
                 CITY: city,
                 STATE: state,
                 COUNTRY: country,
-                ZIP: zip
+                ZIP: zip,
+                JOIN: join
               }
               console.log('email data', emailData)
-              astrochimp(mailChimpUrl, emailData, (err, data) => {
-                if (err) {
-                  console.log('Error:', err)
-                } else {
-                  console.log('Succces:', data)
-                }
-              })
+              if (emailData.JOIN) {
+                astrochimp(mailChimpUrl, emailData, (err, data) => {
+                  if (err) {
+                    console.log('Error:', err)
+                  } else {
+                    console.log('Succces:', data)
+                  }
+                })
+              }
               navigate('/')
             })
             .catch(err => console.error(err) || setMsg('Error: ' + err.message))
@@ -66,9 +70,17 @@ function Signup() {
           </label>
         </div>
 
-        <div className='mb1'>
+        <div className=''>
           <label>
             <input className='auth__input x p1 mb1' required type='text' name='publication' placeholder='Publication' />
+          </label>
+        </div>
+        
+        <div className='mb1'>
+          <label className="auth__label auth__label--checkbox">
+            Join our mailing list
+            <input className='auth__input-checkbox' type='checkbox' name='join' />
+            <span className='auth__checkmark'></span>
           </label>
         </div>
 
