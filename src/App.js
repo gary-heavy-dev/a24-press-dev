@@ -42,7 +42,7 @@ function App() {
         <Layout>
           <Router>
             <PrivateRoute path='/' as={Films} />
-            <Film path='/films/:slug' />
+            <PrivateRoute path='/films/:slug' as={Film} />
             <Login path='/login' />
             <Forgot path='/forgot' />
             <Terms path='/terms' />
