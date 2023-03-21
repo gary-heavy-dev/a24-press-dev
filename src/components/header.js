@@ -15,7 +15,7 @@ function Header() {
             <span className='small ml1 akz-e caps'>Press</span>
             {
               Environment() === 'staging' && (
-                <span className='small ml1 akz-e caps'>(Staging)</span>
+                <span className='small ml1 akz-e caps'>(Staging.)</span>
               )
             }
           </Link>
