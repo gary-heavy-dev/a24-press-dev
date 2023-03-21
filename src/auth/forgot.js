@@ -17,7 +17,6 @@ function Forgot() {
             onSubmit={e => {
               e.preventDefault()
               const email = e.target.email.value
-							console.log('email:: ', email)
               load(requestPasswordRecovery(email))
                 .then(user => {
                   console.log('Recovery Started', user)
