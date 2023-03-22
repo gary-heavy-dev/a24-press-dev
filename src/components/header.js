@@ -27,7 +27,7 @@ function Header() {
               logoutUser().then(() => {
                 navigate(`/login`)
               })
-            }}>Logout</a>)}
+            }}>Logout.</a>)}
       </div>
     </header>
   )
