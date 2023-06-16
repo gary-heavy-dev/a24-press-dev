@@ -111,7 +111,7 @@ class Film extends React.Component {
   componentWillReceiveProps(props) {
     console.log('state updated?')
   }
-  
+
   render() {
     const {
       film,
@@ -173,11 +173,11 @@ class Film extends React.Component {
                             {!download.fileUrl
                               ? (<a href={`${download.download}?dl=${download.fileTitle}.${download.file.extension}`} className='f jcs film__link aic'>
                                   <IoIosCloudDownload />
-                                  <h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
+                                  <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
                                 </a>)
                               : (<a href={download.fileUrl} target="_blank" rel="noopener noreferrer" className='f jcs film__link aic'>
                                   <IoIosCloudDownload />
-                                  <h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
+                                  <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
                                 </a>)
                             }
                           </div>
@@ -202,7 +202,7 @@ class Film extends React.Component {
                                 <div className='modal x f jcc aic' id={`${download.vimeoId}`} aria-hidden="true">
                                   <div className='x' tabIndex="-1" data-micromodal-close>
                                     <div className='x' role="dialog" aria-modal="true" aria-labelledby={`${download.vimeoId}-title`} >
-                                    
+
                                       <div className='modal__video rel ma x' id={`${download.vimeoId}-content`}>
                                         <button onClick={() => this.closeModal(download.vimeoId)} className='abs f jcc aic modal__close z1 right top ' aria-label="Close modal" data-micromodal-close>
                                           <IoMdClose />
@@ -222,7 +222,7 @@ class Film extends React.Component {
                             )}
                             <a href={download.fileUrl || `${download.download}?dl=${download.fileTitle}.zip`} className='f jcs film__link ais'>
                               <IoIosCloudDownload className="film__icon-download" />
-                              <h5 className='m0 p0 ml05'>{download.fileTitle}</h5>
+                              <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
                             </a>
                           </div>
                         ))}
@@ -233,7 +233,7 @@ class Film extends React.Component {
                   <div>
                     <h5 className='akz-e caps mb0'>Image Previews</h5>
                     <div className='film__images f fw jcs'>
-                      <Swiper 
+                      <Swiper
                         onSwiper={setThumbsSwiper}
                         watchSlidesVisibility
                         watchSlidesProgress
@@ -251,7 +251,7 @@ class Film extends React.Component {
                           </SwiperSlide>
                         ))}
                       </Swiper>
-                      <Swiper 
+                      <Swiper
                         id="main"
                         tag="section"
                         loop={film.imagePreviews.length > 1 ? true : false }
