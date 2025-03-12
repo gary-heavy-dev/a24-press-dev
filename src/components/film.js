@@ -13,7 +13,7 @@ import Environment from '../util/environment.js'
 import spacetime from 'spacetime'
 import Image from './image.js'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import SwiperCore, { Thumbs, Navigation, A11y} from 'swiper'
+import SwiperCore, { Thumbs, Navigation, A11y } from 'swiper'
 
 SwiperCore.use([Thumbs, Navigation, A11y]);
 const client = sanityClient({
@@ -138,10 +138,10 @@ class Film extends React.Component {
                 <div className='rel x film__poster'>
                   {film.image && (
                     <React.Fragment>
-                      <a className='abs top z2 left x y' href={`${film.image}?dl=${film.poster.asset._ref}`} />
+                      {/* <a className='abs top z2 left x y' href={`${film.image}?dl=${film.poster.asset._ref}`} />
                       <div className='abs z1 film__images-single-icon'>
                         <IoIosCloudDownload />
-                      </div>
+                      </div> */}
                       <Image className='x obj-fit' source={film.image} imageId={film.poster.asset._ref} size={400} alt={film.title} />
                     </React.Fragment>
                   )}
@@ -172,13 +172,13 @@ class Film extends React.Component {
                           <div key={download._key} className='f film__content-single jcs aic'>
                             {!download.fileUrl
                               ? (<a href={`${download.download}?dl=${download.fileTitle}.${download.file.extension}`} className='f jcs film__link aic'>
-                                  <IoIosCloudDownload />
-                                  <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
-                                </a>)
+                                <IoIosCloudDownload />
+                                <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
+                              </a>)
                               : (<a href={download.fileUrl} target="_blank" rel="noopener noreferrer" className='f jcs film__link aic'>
-                                  <IoIosCloudDownload />
-                                  <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
-                                </a>)
+                                <IoIosCloudDownload />
+                                <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
+                              </a>)
                             }
                           </div>
                         ))}
@@ -230,62 +230,62 @@ class Film extends React.Component {
                     </div>
                   )}
                   {film.imagePreviews && (
-                  <div>
-                    <h5 className='akz-e caps mb0'>Image Previews</h5>
-                    <div className='film__images f fw jcs'>
-                      <Swiper
-                        onSwiper={setThumbsSwiper}
-                        watchSlidesVisibility
-                        watchSlidesProgress
-                        loop={film.imagePreviews.length > 5 ? true : false}
-                        slideToClickedSlide={true}
-                        slidesPerView={5}
-                        navigation
-                        threshold={4}
-                        spaceBetween={15}
-                        className="film__images-container film__images-container--slide-auto"
-                      >
-                      {film.imagePreviews.map((single, idx) => (
-                          <SwiperSlide key={idx} className='film__images-single swiper-slide-auto'>
-                            <Image className='x obj-fit' source={`${single.image}?w=400`} alt='' />
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
-                      <Swiper
-                        id="main"
-                        tag="section"
-                        loop={film.imagePreviews.length > 1 ? true : false }
-                        thumbs={{swiper: thumbsSwiper}}
-                        navigation
-                        threshold={4}
-                        slidesPerView={film.imagePreviews.length > 1 ? 1 : 1}
-                        spaceBetween={15}
-                        className="film__images-container film__images-container--slide"
-                      >
-                        {film.imagePreviews.map((single, idx) => (
-                          <SwiperSlide key={idx} className='film__images-single'>
-                            <div className='slide__inner'>
-                              <Image className='x obj-fit' source={`${single.image}?w=700`} alt='' />
-                              <div className="download-link">
-                                <a href={`${single.image}?dl=${single.image}`} className="f jcs film__link aic">
-                                  <IoIosCloudDownload />
-                                  <h5 className='m0 p0 ml05'>Download Image</h5>
-                                </a>
+                    <div>
+                      <h5 className='akz-e caps mb0'>Image Previews</h5>
+                      <div className='film__images f fw jcs'>
+                        <Swiper
+                          onSwiper={setThumbsSwiper}
+                          watchSlidesVisibility
+                          watchSlidesProgress
+                          loop={film.imagePreviews.length > 5 ? true : false}
+                          slideToClickedSlide={true}
+                          slidesPerView={5}
+                          navigation
+                          threshold={4}
+                          spaceBetween={15}
+                          className="film__images-container film__images-container--slide-auto"
+                        >
+                          {film.imagePreviews.map((single, idx) => (
+                            <SwiperSlide key={idx} className='film__images-single swiper-slide-auto'>
+                              <Image className='x obj-fit' source={`${single.image}?w=400`} alt='' />
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                        <Swiper
+                          id="main"
+                          tag="section"
+                          loop={film.imagePreviews.length > 1 ? true : false}
+                          thumbs={{ swiper: thumbsSwiper }}
+                          navigation
+                          threshold={4}
+                          slidesPerView={film.imagePreviews.length > 1 ? 1 : 1}
+                          spaceBetween={15}
+                          className="film__images-container film__images-container--slide"
+                        >
+                          {film.imagePreviews.map((single, idx) => (
+                            <SwiperSlide key={idx} className='film__images-single'>
+                              <div className='slide__inner'>
+                                <Image className='x obj-fit' source={`${single.image}?w=700`} alt='' />
+                                <div className="download-link">
+                                  <a href={`${single.image}?dl=${single.image}`} className="f jcs film__link aic">
+                                    <IoIosCloudDownload />
+                                    <h5 className='m0 p0 ml05'>Download Image</h5>
+                                  </a>
+                                </div>
                               </div>
-                            </div>
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
+                            </SwiperSlide>
+                          ))}
+                        </Swiper>
+                      </div>
                     </div>
-                  </div>
                   )}
                 </div>
               </div>
             </div>
           </Loading>
         ) : (
-            <div />
-          )}
+          <div />
+        )}
       </div>
     )
   }
