@@ -3,6 +3,7 @@ import { Link, navigate } from '@reach/router'
 
 import { IdentityContext } from '../api/context.js'
 import Environment from '../util/environment.js'
+import Navigation from './navigation.js'
 
 function Header() {
   const { isLoggedIn, logoutUser } = React.useContext(IdentityContext)
@@ -20,14 +21,20 @@ function Header() {
             }
           </Link>
         </h1>
-        {isLoggedIn && (
-          <a href='/'
+        <div className="f">
+          <Navigation />
+          {isLoggedIn && (
+            <a href='/'
             onClick={event => {
               event.preventDefault()
               logoutUser().then(() => {
                 navigate(`/login`)
               })
-            }}>Logout</a>)}
+            }}>
+              Logout
+            </a>
+          )}
+        </div>
       </div>
     </header>
   )
