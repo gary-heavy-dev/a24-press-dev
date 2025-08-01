@@ -10,6 +10,7 @@
     "classnames": "^2.2.6",
     "gatsby-image": "^2.1.0",
     "gatsby-source-sanity": "^4.0.1",
+    "klaviyo-subscribe": "^1.0.0",
     "micromodal": "^0.4.0",
     "netlify-identity-widget": "^1.5.2",
     "plyr": "^3.5.6",
