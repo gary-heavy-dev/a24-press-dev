@@ -960,3 +960,8 @@ li{
   padding:0.5rem 0;
   opacity:0.8;
 }
+.navigation{
+  display:flex;
+  gap:1rem;
+  justify-content:flex-end;
+}
