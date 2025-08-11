@@ -8,21 +8,21 @@ const client = sanityClient({
   dataset: Environment(), // get dataset based on current environment
   useCdn: false // `false` if you want to ensure fresh data
 })
-const queryBooks = `*[_type == "book"] | order(releaseDate desc)`
+const queryProducts = `*[_type == "product"] | order(releaseDate desc)`
 
-class Books extends React.Component {
+class Products extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      books: []
+      products: []
     }
   }
   componentDidMount() {
     client
-      .fetch(queryBooks)
+      .fetch(queryProducts)
       .then(res => {
         this.setState({
-          books: res
+          products: res
         })
       })
       .catch(err => {
@@ -32,7 +32,7 @@ class Books extends React.Component {
   }
   render() {
     const {
-      books
+     products
     } = this.state
     return (
       <div>
@@ -43,15 +43,15 @@ class Books extends React.Component {
         <div className='films__wrapper'>
           <div className='films__header f jcb aic'>
             <div className='ml05'>
-              <h5 className='caps akz-e'>Books</h5>
+              <h5 className='caps akz-e'>Product</h5>
             </div>
             <div className='mr05'>
               <h5 className='caps akz-e col-1'>Release Date</h5>
             </div>
           </div>
           <div className='films__content x'>
-            {books.map(book => (
-              <FilmRow content={book} key={book._id} />
+            {products.map(product => (
+              <FilmRow content={product} key={product._id} />
             ))}
           </div>
         </div>
@@ -60,4 +60,4 @@ class Books extends React.Component {
   }
 }
 
-export default Books
+export default Products

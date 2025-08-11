@@ -6,7 +6,7 @@ class Navigation extends Component {
     return (
       <div className="navigation mr1">
         <Link to='/' className="navigation__link">Films</Link>
-        <Link to='/books' className="navigation__link">Books</Link>
+        {/* <Link to='/products' className="navigation__link">Products</Link> */}
       </div>
     )
   }

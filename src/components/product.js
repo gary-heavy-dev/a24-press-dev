@@ -12,16 +12,16 @@ const client = sanityClient({
   useCdn: false // `false` if you want to ensure fresh data
 })
 
-class Book extends React.Component {
+class Product extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      book: null,
+      product: null,
     }
   }
 
   componentDidMount() {
-    const queryBook = `*[slug.current == '${this.props.slug}'] {
+    const queryProduct = `*[slug.current == '${this.props.slug}'] {
       ...,
       'image': poster.asset->url,
       'imageId': poster.asset->_ref,
@@ -43,10 +43,10 @@ class Book extends React.Component {
       }
     }`
     client
-      .fetch(queryBook)
+      .fetch(queryProduct)
       .then(res => {
         this.setState({
-          book: res[0]
+          product: res[0]
         })
       })
       .catch(err => {
@@ -76,12 +76,12 @@ class Book extends React.Component {
   }
 
   render() {
-    const { book } = this.state
+    const { product } = this.state
 
     return (
       <div>
-        {book ? (
-          <ItemContent item={book} />
+        {product ? (
+          <ItemContent item={product} />
         ) : (
           <div />
         )}
@@ -90,4 +90,4 @@ class Book extends React.Component {
   }
 }
 
-export default Book
+export default Product
