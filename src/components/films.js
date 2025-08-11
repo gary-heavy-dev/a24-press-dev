@@ -51,7 +51,7 @@ class Films extends React.Component {
           </div>
           <div className='films__content x'>
             {films.map(film => (
-              <FilmRow content={film} key={film._id} />
+              <FilmRow content={film} key={film._id} parent="films"/>
             ))}
           </div>
         </div>

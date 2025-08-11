@@ -51,7 +51,7 @@ class Products extends React.Component {
           </div>
           <div className='films__content x'>
             {products.map(product => (
-              <FilmRow content={product} key={product._id} />
+              <FilmRow content={product} key={product._id} parent='products' />
             ))}
           </div>
         </div>
