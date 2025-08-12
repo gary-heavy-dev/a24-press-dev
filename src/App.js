@@ -15,6 +15,8 @@ import Films from './components/films.js'
 import Film from './components/film.js'
 import Products from './components/products.js'
 import Product from './components/product.js'
+import Books from './components/books.js'
+import Book from './components/book.js'
 
 import Login from './auth/login.js'
 import Forgot from './auth/forgot.js'
@@ -47,6 +49,8 @@ function App() {
             <PrivateRoute path='/films/:slug' as={Film} />
             <PrivateRoute path='/products' as={Products} />
             <PrivateRoute path='/products/:slug' as={Product} />
+            <PrivateRoute path='/books' as={Books} />
+            <PrivateRoute path='/books/:slug' as={Book} />
             <Login path='/login' />
             <Forgot path='/forgot' />
             <Terms path='/terms' />
