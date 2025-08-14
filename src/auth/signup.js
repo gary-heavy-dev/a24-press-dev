@@ -3,7 +3,6 @@ import { navigate, Link } from '@reach/router'
 import { IdentityContext } from '../api/context.js'
 import useLoading from '../components/useLoading.js'
 import astrochimp from 'astrochimp'
-import { subscribe } from 'klaviyo-subscribe'
 
 function Signup() {
   const { signupUser } = React.useContext(IdentityContext)
@@ -26,12 +25,9 @@ function Signup() {
           const state = e.target.state.value
           const zip = e.target.zip.value
           const country = e.target.country.value
-          const join = e.target.join.checked    
+          const join = e.target.join.checked
 
-          // const mailChimpUrl = `https://a24films.us14.list-manage.com/subscribe/post?u=d6a612d44078d0634d5fa0663&amp;id=2b211ff970`
-
-          const listId = "WRV4zs"
-
+          const mailChimpUrl = `https://a24films.us14.list-manage.com/subscribe/post?u=d6a612d44078d0634d5fa0663&amp;id=2b211ff970`
           load(signupUser(email, password))
             .then(user => {
               console.log('Success! Signed Up', user)
@@ -48,28 +44,14 @@ function Signup() {
                 JOIN: join
               }
               console.log('email data', emailData)
-              // if (emailData.JOIN) {
-              //   astrochimp(mailChimpUrl, emailData, (err, data) => {
-              //     if (err) {
-              //       console.log('Error:', err)
-              //     } else {
-              //       console.log('Succces:', data)
-              //     }
-              //   })
-              // }
               if (emailData.JOIN) {
-                subscribe(listId, email, {
-                  $fields: ["Street_Address", "Address_Line_2", "Phone_Number", "Publication", "City", "State", "Zip", "Country", "Source"],
-                  Street_Address: emailData.ST_ADDR,
-                  Address_Line_2: emailData.ADDR2,
-                  Phone_Number: emailData.PHONE,
-                  Publication: emailData.PUBLICA,
-                  City: emailData.CITY,
-                  State: emailData.STATE,
-                  Zip: emailData.ZIP,
-                  Country: emailData.COUNTRY,
-                  Source: "Press Site Signup"
-                }).then(response => {});
+                astrochimp(mailChimpUrl, emailData, (err, data) => {
+                  if (err) {
+                    console.log('Error:', err)
+                  } else {
+                    console.log('Succces:', data)
+                  }
+                })
               }
               navigate('/')
             })
@@ -93,7 +75,7 @@ function Signup() {
             <input className='auth__input x p1 mb1' required type='text' name='publication' placeholder='Publication' />
           </label>
         </div>
-        
+
         <div className='mb1'>
           <label className="auth__label auth__label--checkbox">
             Join our mailing list
@@ -116,7 +98,7 @@ function Signup() {
               placeholder='Phone Number' />
           </label>
         </div>
-        
+
         <div>
           <div className='mc-address-group'>
             <div className='mc-field-group'>
