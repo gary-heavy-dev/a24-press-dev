@@ -8,26 +8,21 @@ class FilmRow extends React.Component {
       title,
       slug,
       releaseDate,
-      previewDates
+      previewDates,
     } = this.props.content
+
+    const { parent } = this.props
     const date = spacetime(releaseDate)
     return (
       <div className='py1 films__row x f jcb aic rel'>
-        <Link to={`/films/${slug.current}`} className='abs z1 x y top left' />
+        <Link to={`/${parent}/${slug.current}`} className='abs z1 x y top left' />
         <div className='ml05 f jcb aic'>
           <h4 className='m0 p0'>{title}</h4>
           <svg fill='currentColor' className='ml1' version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 55 20"><polygon fillRule='evenodd' clipRule='evenodd' points="43.3,0 55,10 43.3,20 42.4,19.1 52.2,10.7 0,10.7 0,9.3 52.2,9.3   42.4,0.9 43.3,0 " /></svg>
         </div>
         {(releaseDate || previewDates) && (
           <div className='mr05'>
-            {!previewDates
-              ? (
-                <h4 className='small caps m0 p0 akz-e'>{date.dayName()} {date.monthName()} {date.date()} {date.year()}</h4>
-              )
-              : (<h4 className='films__row-date small caps m0 p0 akz-e'>{previewDates && previewDates.map(date => (
-                <span>{date}</span>
-              ))}</h4>)
-            }
+
           </div>
         )}
       </div>

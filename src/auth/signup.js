@@ -25,7 +25,7 @@ function Signup() {
           const state = e.target.state.value
           const zip = e.target.zip.value
           const country = e.target.country.value
-          const join = e.target.join.checked    
+          const join = e.target.join.checked
 
           const mailChimpUrl = `https://a24films.us14.list-manage.com/subscribe/post?u=d6a612d44078d0634d5fa0663&amp;id=2b211ff970`
           load(signupUser(email, password))
@@ -75,7 +75,7 @@ function Signup() {
             <input className='auth__input x p1 mb1' required type='text' name='publication' placeholder='Publication' />
           </label>
         </div>
-        
+
         <div className='mb1'>
           <label className="auth__label auth__label--checkbox">
             Join our mailing list
@@ -98,7 +98,7 @@ function Signup() {
               placeholder='Phone Number' />
           </label>
         </div>
-        
+
         <div>
           <div className='mc-address-group'>
             <div className='mc-field-group'>

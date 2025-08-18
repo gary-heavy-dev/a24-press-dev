@@ -5,24 +5,23 @@ import Environment from '../util/environment.js'
 import SwiperCore, { Thumbs, Navigation, A11y } from 'swiper'
 import ItemContent from './itemContent.js'
 SwiperCore.use([Thumbs, Navigation, A11y]);
+
 const client = sanityClient({
   projectId: 'xq1bjtf4',
   dataset: Environment(),
   useCdn: false // `false` if you want to ensure fresh data
 })
 
-
-
-class Film extends React.Component {
+class Product extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      film: null,
+      product: null,
     }
   }
 
   componentDidMount() {
-    const queryFilm = `*[slug.current == '${this.props.slug}'] {
+    const queryProduct = `*[slug.current == '${this.props.slug}'] {
       ...,
       'image': poster.asset->url,
       'imageId': poster.asset->_ref,
@@ -44,10 +43,10 @@ class Film extends React.Component {
       }
     }`
     client
-      .fetch(queryFilm)
+      .fetch(queryProduct)
       .then(res => {
         this.setState({
-          film: res[0]
+          product: res[0]
         })
       })
       .catch(err => {
@@ -77,12 +76,12 @@ class Film extends React.Component {
   }
 
   render() {
-    const { film } = this.state
+    const { product } = this.state
 
     return (
       <div>
-        {film ? (
-          <ItemContent item={film} />
+        {product ? (
+          <ItemContent item={product} />
         ) : (
           <div />
         )}
@@ -91,4 +90,4 @@ class Film extends React.Component {
   }
 }
 
-export default Film
+export default Product

@@ -1,22 +1,22 @@
 import React from 'react'
+import {client} from '../util/client'
 import ContentList from './contentList.js'
-import { client } from '../util/client.js'
 
-const queryFilms = `*[_type == "movie"] | order(releaseDate desc)`
+const queryProducts = `*[_type == "product"] | order(releaseDate desc)`
 
-class Films extends React.Component {
+class Products extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      films: []
+      products: []
     }
   }
   componentDidMount() {
     client
-      .fetch(queryFilms)
+      .fetch(queryProducts)
       .then(res => {
         this.setState({
-          films: res
+          products: res
         })
       })
       .catch(err => {
@@ -26,12 +26,12 @@ class Films extends React.Component {
   }
   render() {
     const {
-      films
+     products
     } = this.state
     return (
-      <ContentList content={films} contentType='films' />
+      <ContentList content={products} contentType='products'/>
     )
   }
 }
 
-export default Films
+export default Products
