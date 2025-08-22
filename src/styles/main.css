@@ -43,3 +43,7 @@ li {
   gap: 1rem;
   justify-content: flex-end;
 }
+
+.f1 {
+  flex: 1;
+}
