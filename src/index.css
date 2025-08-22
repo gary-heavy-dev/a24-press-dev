@@ -39,6 +39,9 @@ textarea{
   min-width:0;
   min-height:0;
 }
+.f1{
+  flex: 1;
+}
 .al{ text-align:left }
 .ac{ text-align:center }
 .ar{ text-align:right }
