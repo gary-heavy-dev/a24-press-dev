@@ -563,6 +563,7 @@ select{
 .films__row  svg{
   transition:all 0.3s ease-in-out;
   width:46px;
+  min-width: 46px;
 }
 @media (max-width: 50em){
 .film__wrapper{
