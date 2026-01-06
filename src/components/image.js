@@ -7,7 +7,7 @@ import Img from 'gatsby-image'
 import { getFluidGatsbyImage } from 'gatsby-source-sanity'
 
 const sanityConfig = {
-  projectId: 'xq1bjtf4',
+  projectId: 'mmd5bl9c',
   dataset: Environment(), // get dataset based on current environment
 }
 

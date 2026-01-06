@@ -7,7 +7,7 @@ import ItemContent from './itemContent.js'
 SwiperCore.use([Thumbs, Navigation, A11y]);
 
 const client = sanityClient({
-  projectId: 'xq1bjtf4',
+  projectId: 'mmd5bl9c',
   dataset: Environment(),
   useCdn: false // `false` if you want to ensure fresh data
 })
