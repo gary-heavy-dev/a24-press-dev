@@ -62,10 +62,4 @@ function App() {
   )
 }
 
-function PublicRoute(props) {
-  return <div className='container--l mxa p1 outer'> {
-    props.children
-  } </div>
-}
-
 export default App;

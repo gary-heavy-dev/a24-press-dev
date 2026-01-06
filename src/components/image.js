@@ -57,7 +57,7 @@ class Image extends React.Component {
 
   render() {
     const { src, visible, loaded, mounted } = this.state
-    const { imageId, size } = this.props
+    const { imageId } = this.props
 
     let fluidProps
     if (imageId) {

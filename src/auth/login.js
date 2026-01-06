@@ -7,6 +7,7 @@ function Login(props) {
   const { loginUser } = React.useContext(IdentityContext)
   const formRef = React.useRef()
   const [msg, setMsg] = React.useState('')
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, load] = useLoading()
   return (
     <div className='ac x container--xs mxa auth__none f jcc aic'>

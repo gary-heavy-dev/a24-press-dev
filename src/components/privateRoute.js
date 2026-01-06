@@ -1,10 +1,4 @@
 import React from "react"
-import {
-  isLoggedIn
-} from '../api/auth.js'
-import {
-  navigate
-} from "@reach/router"
 import Login from '../auth/login.js'
 import { IdentityContext } from '../api/context.js'
 import netlifyIdentity from 'netlify-identity-widget'
