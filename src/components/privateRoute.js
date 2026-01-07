@@ -3,7 +3,6 @@ import Login from '../auth/login.js'
 import { IdentityContext } from '../api/context.js'
 import netlifyIdentity from 'netlify-identity-widget'
 
-
 class PrivateRoute extends React.Component {
   static contextType = IdentityContext
   constructor() {
@@ -25,18 +24,22 @@ class PrivateRoute extends React.Component {
       }, 1000)
     })
   }
-  componentWillReceiveProps () {
+  componentDidUpdate() {
     if (this.context.user === undefined) {
-      this.setState({
-        loggedIn: false
-      })
+      if (this.state.loggedIn) {
+        this.setState({
+          loggedIn: false
+        })
+      }
     } else if (this.context.isLoggedIn) {
-      this.setState({
-        loggedIn: true
-      })
-      setTimeout(() => {
-        // location.reload()
-      }, 400)
+      if (!this.state.loggedIn) {
+        this.setState({
+          loggedIn: true
+        })
+        setTimeout(() => {
+          // location.reload()
+        }, 400)
+      }
     }
   }
   render() {

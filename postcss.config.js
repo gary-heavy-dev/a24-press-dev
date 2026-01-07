@@ -4,10 +4,12 @@ module.exports = {
   plugins: [
     require('postcss-import'),
     require('postcss-nested'),
-    require('postcss-cssnext'),
+    require('postcss-preset-env')({
+      stage: 0,
+    }),
     require('postcss-calc'),
     require('postcss-discard-comments'),
     require('postcss-reporter'),
-    p ? require('cssnano') : ''
+    p ? require('cssnano') : false
   ]
 }

@@ -65,9 +65,7 @@ class Book extends React.Component {
     MicroModal.close(domModal)
     this.state.video.pause()
   }
-  componentWillReceiveProps(props) {
-    console.log('state updated?')
-  }
+
 
   render() {
     const { book } = this.state

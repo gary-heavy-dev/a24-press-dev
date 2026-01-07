@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
 import Image from './image.js'
-import BlockContent from '@sanity/block-content-to-react'
+import { PortableText } from '@portabletext/react'
 import {
   IoIosCloudDownload,
   IoIosPlay,
@@ -106,7 +106,7 @@ class ItemContent extends Component {
           <div className='film__content-inner'>
             <h3 className='m0 p0'>{item.title}</h3>
             <div className='container--xs'>
-              <BlockContent blocks={item.overview} />
+              <PortableText value={item.overview} />
             </div>
             {(item.releaseDate || item.previewDates) && (
               <div>
@@ -114,8 +114,8 @@ class ItemContent extends Component {
                 <div className='film__content-dates container--xs'>
                   {!item.previewDates
                     ? (<p className='film__content-date film__content-date--release'>{spacetime(item.releaseDate).dayName()} {spacetime(item.releaseDate).monthName()} {spacetime(item.releaseDate).date()} {spacetime(item.releaseDate).year()}</p>)
-                    : (<p className='film__content-date film__content-date--preview'>{item.previewDates && item.previewDates.map(date => (
-                      <span>{date}</span>
+                    : (<p className='film__content-date film__content-date--preview'>{item.previewDates && item.previewDates.map((date, i) => (
+                      <span key={i}>{date}</span>
                     ))}</p>)
                   }
                 </div>
@@ -128,10 +128,10 @@ class ItemContent extends Component {
                   {item.fileDownloads && item.fileDownloads.map(download => (
                     <div key={download._key} className='f film__content-single jcs aic'>
                       {!download.fileUrl
-                        ? (<a href={`${download.download}?dl=${download.fileTitle}.${download.file.extension}`} className='f jcs film__link aic'>
-                          <IoIosCloudDownload />
-                          <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
-                        </a>)
+                         ? (<a href={download.file ? `${download.download}?dl=${download.fileTitle}.${download.file.extension}` : '#'} className='f jcs film__link aic'>
+                           <IoIosCloudDownload />
+                           <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>
+                         </a>)
                         : (<a href={download.fileUrl} target="_blank" rel="noopener noreferrer" className='f jcs film__link aic'>
                           <IoIosCloudDownload />
                           <h5 className='m0 p0 ml05'>{download.displayTitle || download.fileTitle}</h5>

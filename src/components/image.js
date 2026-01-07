@@ -1,14 +1,13 @@
 import React from 'react'
 import vsbl from 'vsbl'
 import cx from 'classnames'
-import Environment from '../util/environment.js'
+import { client } from '../util/client'
+import imageUrlBuilder from '@sanity/image-url'
 
-import Img from 'gatsby-image'
-import { getFluidGatsbyImage } from 'gatsby-source-sanity'
+const builder = imageUrlBuilder(client)
 
-const sanityConfig = {
-  projectId: 'mmd5bl9c',
-  dataset: Environment(), // get dataset based on current environment
+function urlFor(source) {
+  return builder.image(source)
 }
 
 class Image extends React.Component {
@@ -16,7 +15,7 @@ class Image extends React.Component {
     super(props)
 
     this.state = {
-      src: `${/insta/.test(this.props.source) ? this.props.source : `${this.props.source}`}`,
+      src: this.props.source ? `${/insta/.test(this.props.source) ? this.props.source : `${this.props.source}`}` : null,
       visible: false,
       loaded: false,
       mounted: false
@@ -59,32 +58,29 @@ class Image extends React.Component {
     const { src, visible, loaded, mounted } = this.state
     const { imageId } = this.props
 
-    let fluidProps
+    let imageSrc = src
     if (imageId) {
-      fluidProps = getFluidGatsbyImage(imageId, { maxWidth: 500 }, sanityConfig)
+      // Replicate maxWidth: 500 from original
+      imageSrc = urlFor(imageId).width(500).url()
     }
 
     return (
       <div className={cx(`x y image__block block ${this.props.className}`, {
-        'background': /jpg/.test(src),
+        'background': src && /jpg/.test(src),
         'is-visible': visible
       })} ref={this.image}>
-        {fluidProps ? (
-          <Img fluid={fluidProps} />
-        ) : (
-            <img
-              alt={this.props.alt}
-              src={mounted ? src : null}
-              className={cx(`x y block`, {
-                'is-loaded': loaded,
-                'is-visible': visible
-              })}
-              onLoad={() => {
-                this.setState({
-                  loaded: true
-                })
-              }} />
-          )}
+          <img
+            alt={this.props.alt}
+            src={mounted ? imageSrc : null}
+            className={cx(`x y block`, {
+              'is-loaded': loaded,
+              'is-visible': visible
+            })}
+            onLoad={() => {
+              this.setState({
+                loaded: true
+              })
+            }} />
       </div>
     )
   }
