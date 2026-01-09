@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { login, getError } from '../api/auth.js'
+import { login, getError, EXPIRED_KEY } from '../api/auth.js'
 import { useAuthRedirect } from '../api/authHooks.js'
 import useLoading from '../components/useLoading.js'
 
@@ -9,6 +9,13 @@ function Login() {
   const [msg, setMsg] = React.useState('')
   // eslint-disable-next-line no-unused-vars
   const [isLoading, load] = useLoading()
+
+  React.useEffect(() => {
+    if (localStorage.getItem(EXPIRED_KEY)) {
+      setMsg('Your session has expired. Please login again.')
+      localStorage.removeItem(EXPIRED_KEY)
+    }
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault()

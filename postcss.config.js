@@ -5,7 +5,7 @@ module.exports = {
     require('postcss-import'),
     require('postcss-nested'),
     require('postcss-preset-env')({
-      stage: 0,
+      stage: 3,
     }),
     require('postcss-calc'),
     require('postcss-discard-comments'),
