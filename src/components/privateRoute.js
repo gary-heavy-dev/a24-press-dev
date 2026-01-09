@@ -1,60 +1,22 @@
-import React from "react"
+import React from 'react'
+import { useAuth0 } from '@auth0/auth0-react'
+import { getLocalSession } from '../api/auth.js'
 import Login from '../auth/login.js'
-import { IdentityContext } from '../api/context.js'
-import netlifyIdentity from 'netlify-identity-widget'
 
-class PrivateRoute extends React.Component {
-  static contextType = IdentityContext
-  constructor() {
-    super()
-    this.state = {
-      loggedIn: false
-    }
-  }
-  componentDidMount() {
-    if (this.context.isLoggedIn) {
-      this.setState({
-        loggedIn: true
-      })
-    }
+function PrivateRoute(props) {
+  const { isAuthenticated, isLoading } = useAuth0()
+  const localSession = getLocalSession()
+  const isUserAuthenticated = isAuthenticated || !!localSession
 
-    netlifyIdentity.on('login', user => {
-      setTimeout(() => {
-        document.location.reload()
-      }, 1000)
-    })
+  let { as: Comp, ...rest } = props
+
+  if (isLoading) return <div className="ac x container--xs mxa auth__none f jcc aic">Loading...</div>
+  
+  if (isUserAuthenticated) {
+    return <Comp {...rest} />
   }
-  componentDidUpdate() {
-    if (this.context.user === undefined) {
-      if (this.state.loggedIn) {
-        this.setState({
-          loggedIn: false
-        })
-      }
-    } else if (this.context.isLoggedIn) {
-      if (!this.state.loggedIn) {
-        this.setState({
-          loggedIn: true
-        })
-        setTimeout(() => {
-          // location.reload()
-        }, 400)
-      }
-    }
-  }
-  render() {
-    let { as: Comp, ...rest } = this.props
-    return (
-      <div>
-        {this.state.loggedIn ? (
-          <Comp {...rest} />
-        ) : (
-            <Login />
-          )}
-      </div>
-    )
-  }
+
+  return <Login />
 }
-
 
 export default PrivateRoute

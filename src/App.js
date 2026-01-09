@@ -5,9 +5,7 @@ import {
 
 import './index.css'
 
-import { useNetlifyIdentity } from 'react-netlify-identity'
-import { IdentityContext } from './api/context.js'
-import { initAuth } from './api/auth.js'
+import { Auth0Provider } from '@auth0/auth0-react'
 
 import PrivateRoute from './components/privateRoute.js'
 import Layout from './components/layout.js'
@@ -23,8 +21,6 @@ import Forgot from './auth/forgot.js'
 import Signup from './auth/signup.js'
 import Terms from './pages/terms.js'
 
-initAuth()
-
 function AuthRoute(props) {
   let { as: Comp, ...rest } = props
   return (
@@ -37,12 +33,17 @@ function AuthRoute(props) {
 }
 
 function App() {
-  const identity = useNetlifyIdentity('https://press.a24films.com')
   return (
     <div className="App">
     <link rel="stylesheet" href="https://use.typekit.net/ewm3ygz.css" />
     <link rel="stylesheet" href="https://cdn.plyr.io/3.5.3/plyr.css" />
-      <IdentityContext.Provider value={identity}>
+      <Auth0Provider
+        domain={process.env.REACT_APP_AUTH0_DOMAIN}
+        clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+        authorizationParams={{
+          redirect_uri: window.location.origin
+        }}
+      >
         <Layout>
           <Router>
             <PrivateRoute path='/' as={Films} />
@@ -57,7 +58,7 @@ function App() {
             <AuthRoute as={Signup} path='/signup' />
           </Router>
         </Layout>
-      </IdentityContext.Provider>
+      </Auth0Provider>
     </div>
   )
 }

@@ -72,6 +72,10 @@
       pointer-events: none;
     }
   }
+
+  &__error {
+    text-wrap: auto;
+  }
 }
 
 select {

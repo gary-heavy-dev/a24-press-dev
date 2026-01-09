@@ -534,6 +534,9 @@ h2.level-6{
       transform:rotate(45deg);
       pointer-events:none;
     }
+.auth__error{
+    text-wrap:auto;
+  }
 select{
   padding:1rem;
   height:40px;

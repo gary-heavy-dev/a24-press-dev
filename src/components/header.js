@@ -1,12 +1,16 @@
 import React from 'react'
-import { Link, navigate } from '@reach/router'
+import { Link } from '@reach/router'
+import { useAuth0 } from '@auth0/auth0-react'
 
-import { IdentityContext } from '../api/context.js'
 import Environment from '../util/environment.js'
 import Navigation from './navigation.js'
+import { getLocalSession, logout } from '../api/auth.js'
 
 function Header() {
-  const { isLoggedIn, logoutUser } = React.useContext(IdentityContext)
+  const { isAuthenticated } = useAuth0()
+  const localSession = getLocalSession()
+  const isUserAuthenticated = isAuthenticated || !!localSession
+
   return (
     <header className='header'>
       <div className='p15 outer container--l mxa x f jcb aic'>
@@ -23,13 +27,11 @@ function Header() {
         </h1>
         <div className="f">
           <Navigation />
-          {isLoggedIn && (
+          {isUserAuthenticated && (
             <a href='/'
             onClick={event => {
               event.preventDefault()
-              logoutUser().then(() => {
-                navigate(`/login`)
-              })
+              logout()
             }}>
               Logout
             </a>

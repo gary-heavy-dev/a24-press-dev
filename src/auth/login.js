@@ -1,46 +1,41 @@
 import React from 'react'
-import { navigate, Link } from '@reach/router'
-import { IdentityContext } from '../api/context.js'
+import { Link } from '@reach/router'
+import { login, getError } from '../api/auth.js'
+import { useAuthRedirect } from '../api/authHooks.js'
 import useLoading from '../components/useLoading.js'
 
-function Login(props) {
-  const { loginUser } = React.useContext(IdentityContext)
-  const formRef = React.useRef()
+function Login() {
+  useAuthRedirect()
   const [msg, setMsg] = React.useState('')
   // eslint-disable-next-line no-unused-vars
   const [isLoading, load] = useLoading()
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const { email, password } = e.target
+    load(login(email.value, password.value))
+      .catch(err => setMsg('Error: ' + getError(err)))
+  }
+
   return (
     <div className='ac x container--xs mxa auth__none f jcc aic'>
       <div className='x'>
         <div>
-          <form
-            ref={formRef}
-            onSubmit={e => {
-              e.preventDefault()
-              const email = e.target.email.value
-              const password = e.target.password.value
-              load(loginUser(email, password))
-                .then(user => {
-                  console.log('Success! Logged in', user)
-                  navigate('/')
-                })
-                .catch(err => console.error(err) || setMsg('Error: ' + err.message))
-            }}
-          >
+          <form onSubmit={handleSubmit}>
             <div>
               <h3>Welcome</h3>
               <label>
-                <input className='auth__input x p1 mb1' type='email' name='email' placeholder='Email' />
+                <input className='auth__input x p1 mb1' type='email' name='email' placeholder='Email' autoComplete="email" />
               </label>
             </div>
             <div className='mb1 pb1'>
               <label>
-                <input className='auth__input x p1 mb1' type='password' name='password' placeholder='Password' />
+                <input className='auth__input x p1 mb1' type='password' name='password' placeholder='Password' autoComplete="current-password" />
               </label>
             </div>
             <div>
               <input className='button m05 akz caps mr1' type='submit' value='Log in' />
-              {msg && <pre>{msg}</pre>}
+              {msg && <pre className='auth__error'>{msg}</pre>}
             </div>
             <div className='mt pt1'>
               Don't have an account? <Link to='/signup' className='underline'>Sign Up</Link>

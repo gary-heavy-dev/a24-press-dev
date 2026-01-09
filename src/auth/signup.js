@@ -1,73 +1,48 @@
-import React from 'react'
-import { navigate, Link } from '@reach/router'
-import { IdentityContext } from '../api/context.js'
+import React, { useState } from 'react'
+import { Link } from '@reach/router'
+import { signup, login, getError, subscribe } from '../api/auth.js'
+import { useAuthRedirect } from '../api/authHooks.js'
 import useLoading from '../components/useLoading.js'
-import astrochimp from 'astrochimp'
 
 function Signup() {
-  const { signupUser } = React.useContext(IdentityContext)
-  const formRef = React.useRef()
-  const [msg, setMsg] = React.useState('')
+  useAuthRedirect()
+  const [msg, setMsg] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [isLoading, load] = useLoading()
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    const fd = new FormData(e.target)
+    const data = Object.fromEntries(fd.entries())
+    const { email, password, publication, phone, addr1, addr2, city, state, zip, country, join } = data
+
+    const userMetadata = { publication, phone, address: addr1, addressTwo: addr2, city, state, zip, country }
+
+    load(signup(email, password, userMetadata))
+      .then(() => {
+        if (join) {
+          subscribe({
+            EMAIL: email, PUBLICA: publication, PHONE: phone, ST_ADDR: addr1,
+            ADDR2: addr2, CITY: city, STATE: state, COUNTRY: country, ZIP: zip, JOIN: !!join
+          })
+        }
+        return login(email, password)
+      })
+      .catch(err => setMsg('Error: ' + getError(err)))
+  }
+
   return (
     <div>
-      <form
-        ref={formRef}
-        onSubmit={e => {
-          e.preventDefault()
-          const email = e.target.email.value
-          const publication = e.target.publication.value
-          const phone = e.target.phone.value
-          const password = e.target.password.value
-          const address = e.target.addr1.value
-          const addressTwo = e.target.addr2.value
-          const city = e.target.city.value
-          const state = e.target.state.value
-          const zip = e.target.zip.value
-          const country = e.target.country.value
-          const join = e.target.join.checked
-
-          const mailChimpUrl = `https://a24films.us14.list-manage.com/subscribe/post?u=d6a612d44078d0634d5fa0663&amp;id=2b211ff970`
-          load(signupUser(email, password))
-            .then(user => {
-              console.log('Success! Signed Up', user)
-              const emailData = {
-                EMAIL: email,
-                PUBLICA: publication,
-                PHONE: phone,
-                ST_ADDR: address,
-                ADDR2: addressTwo,
-                CITY: city,
-                STATE: state,
-                COUNTRY: country,
-                ZIP: zip,
-                JOIN: join
-              }
-              console.log('email data', emailData)
-              if (emailData.JOIN) {
-                astrochimp(mailChimpUrl, emailData, (err, data) => {
-                  if (err) {
-                    console.log('Error:', err)
-                  } else {
-                    console.log('Succces:', data)
-                  }
-                })
-              }
-              navigate('/')
-            })
-            .catch(err => console.error(err) || setMsg('Error: ' + err.message))
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <div>
           <h3>Sign Up</h3>
           <label>
-            <input className='auth__input x p1 mb1' required type='email' name='email' placeholder='Email' />
+            <input className='auth__input x p1 mb1' required type='email' name='email' placeholder='Email' autoComplete="email" />
           </label>
         </div>
         <div className=''>
           <label>
-            <input className='auth__input x p1 mb1' required type='password' name='password' placeholder='Password' />
+            <input className='auth__input x p1 mb1' required type='password' name='password' placeholder='Password' autoComplete="new-password" />
           </label>
         </div>
 
@@ -88,7 +63,7 @@ function Signup() {
         <div>
           <button className='button m05 akz caps mr1'>Sign Up </button>
           or <Link to='/login' className='underline'>Login</Link>
-          {msg && <pre>{msg}</pre>}
+          {msg && <pre className='auth__error'>{msg}</pre>}
         </div>
         <div className='mt1 pt1'>
           <span className='akz-e caps small mb1 inline-block'>Optional</span>
@@ -96,7 +71,7 @@ function Signup() {
         <div className='mb05'>
           <label>
             <input className='auth__input x p1' type='tel' id='phone' name='phone'
-              placeholder='Phone Number' />
+              placeholder='Phone Number' autoComplete="tel" />
           </label>
         </div>
 
@@ -104,29 +79,29 @@ function Signup() {
           <div className='mc-address-group'>
             <div className='mc-field-group'>
               <label htmlFor='mce-ADDRESS-addr1'>
-              <input type='text' maxLength='70'  placeholder='Address' name='addr1' id='mce-ADDRESS-addr1' className='auth__input p1 x mb05' /></label>
+              <input type='text' maxLength='70'  placeholder='Address' name='addr1' id='mce-ADDRESS-addr1' className='auth__input p1 x mb05' autoComplete="address-line1" /></label>
             </div>
             <div className='mc-field-group'>
               <label htmlFor='mce-ADDRESS-addr2'>
-              <input type='text' maxLength='70' name='addr2' placeholder='Apt. Suite. Bld.' id='mce-ADDRESS-addr2' className='auth__input p1 x mb05' /></label>
+              <input type='text' maxLength='70' name='addr2' placeholder='Apt. Suite. Bld.' id='mce-ADDRESS-addr2' className='auth__input p1 x mb05' autoComplete="address-line2" /></label>
             </div>
             <div className='f jcb aic ma x auth__group'>
               <div className='mc-field-group auth__three'>
                 <label htmlFor='mce-ADDRESS-city'>
-                <input type='text' maxLength='40' placeholder='City' name='city' id='mce-ADDRESS-city' className='auth__input p1 x mb05' /></label>
+                <input type='text' maxLength='40' placeholder='City' name='city' id='mce-ADDRESS-city' className='auth__input p1 x mb05' autoComplete="address-level2" /></label>
               </div>
               <div className='mc-field-group auth__three'>
                 <label htmlFor='mce-ADDRESS-state'>
-                <input type='text' maxLength='20' placeholder='State' name='state' id='mce-ADDRESS-state' className='auth__input p1 x mb05' /></label>
+                <input type='text' maxLength='20' placeholder='State' name='state' id='mce-ADDRESS-state' className='auth__input p1 x mb05' autoComplete="address-level1" /></label>
               </div>
               <div className='mc-field-group auth__three'>
                 <label htmlFor='mce-ADDRESS-zip'>
-                <input type='text' maxLength='10' name='zip' id='mce-ADDRESS-zip' className='auth__input p1 x mb05' placeholder='Zip' /></label>
+                <input type='text' maxLength='10' name='zip' id='mce-ADDRESS-zip' className='auth__input p1 x mb05' placeholder='Zip' autoComplete="postal-code" /></label>
               </div>
             </div>
             <div className='mc-field-group size1of2'>
               <label htmlFor='mce-ADDRESS-country'>
-              <select name='country' id='mce-ADDRESS-country' className='auth__input p1 x mb05'>
+              <select name='country' id='mce-ADDRESS-country' className='auth__input p1 x mb05' autoComplete="country-name">
                 <option value=""></option>
                 <option value="United States of America">United States of America</option>
                 <option value="Aaland Islands">Aaland Islands</option>
@@ -385,7 +360,7 @@ function Signup() {
           <div className='mt1'>
             <button className='button m05 akz caps mr1'>Sign Up </button>
             or <Link to='/login' className='underline'>Login</Link>
-            {msg && <pre>{msg}</pre>}
+            {msg && <pre className='auth__error'>{msg}</pre>}
           </div>
         </div>
       </form>
