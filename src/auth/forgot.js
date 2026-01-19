@@ -4,16 +4,15 @@ import { recovery, getError } from '../api/auth.js'
 import useLoading from '../components/useLoading.js'
 
 function Forgot() {
-  const [msg, setMsg] = React.useState('')
-  // eslint-disable-next-line no-unused-vars
-  const [isLoading, load] = useLoading()
+  const [message, setMessage] = React.useState('')
+  const [, load] = useLoading()
   
   const handleSubmit = e => {
     e.preventDefault()
     const email = e.target.email.value
     load(recovery(email))
-      .then(() => navigate('/'))
-      .catch(err => setMsg('Error: ' + getError(err)))
+      .then((response) => navigate('/login', { state: { successMsg: response } }))
+      .catch(error => setMessage('Error: ' + getError(error)))
   }
 
   return (
@@ -29,7 +28,7 @@ function Forgot() {
             </div>
             <div>
               <input className='button m05 akz caps mr1' type='submit' value='Request reset' />
-              {msg && <pre className='auth__error'>{msg}</pre>}
+              {message && <pre className='auth__error'>{message}</pre>}
             </div>
             <div className='mt pt1'>
               <div>or <Link to='/' className='underline'>Cancel</Link></div>

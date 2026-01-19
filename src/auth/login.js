@@ -1,27 +1,26 @@
 import React from 'react'
 import { Link } from '@reach/router'
-import { login, getError, EXPIRED_KEY } from '../api/auth.js'
+import { login, getError } from '../api/auth.js'
 import { useAuthRedirect } from '../api/authHooks.js'
 import useLoading from '../components/useLoading.js'
 
-function Login() {
+function Login(props) {
   useAuthRedirect()
-  const [msg, setMsg] = React.useState('')
-  // eslint-disable-next-line no-unused-vars
-  const [isLoading, load] = useLoading()
+  const [message, setMessage] = React.useState('')
+  const [, load] = useLoading()
 
   React.useEffect(() => {
-    if (localStorage.getItem(EXPIRED_KEY)) {
-      setMsg('Your session has expired. Please login again.')
-      localStorage.removeItem(EXPIRED_KEY)
+    if (props.location?.state?.successMsg) {
+      setMessage(props.location.state.successMsg)
+      window.history.replaceState({}, document.title)
     }
-  }, [])
+  }, [props.location])
 
   const handleSubmit = e => {
     e.preventDefault()
     const { email, password } = e.target
     load(login(email.value, password.value))
-      .catch(err => setMsg('Error: ' + getError(err)))
+      .catch(error => setMessage('Error: ' + getError(error)))
   }
 
   return (
@@ -42,7 +41,7 @@ function Login() {
             </div>
             <div>
               <input className='button m05 akz caps mr1' type='submit' value='Log in' />
-              {msg && <pre className='auth__error'>{msg}</pre>}
+              {message && <pre className='auth__error'>{message}</pre>}
             </div>
             <div className='mt pt1'>
               Don't have an account? <Link to='/signup' className='underline'>Sign Up</Link>

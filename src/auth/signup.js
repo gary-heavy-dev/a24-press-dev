@@ -6,14 +6,13 @@ import useLoading from '../components/useLoading.js'
 
 function Signup() {
   useAuthRedirect()
-  const [msg, setMsg] = useState('')
-  // eslint-disable-next-line no-unused-vars
-  const [isLoading, load] = useLoading()
+  const [message, setMessage] = useState('')
+  const [, load] = useLoading()
 
   const handleSubmit = e => {
     e.preventDefault()
-    const fd = new FormData(e.target)
-    const data = Object.fromEntries(fd.entries())
+    const formData = new FormData(e.target)
+    const data = Object.fromEntries(formData.entries())
     const { email, password, publication, phone, addr1, addr2, city, state, zip, country, join } = data
 
     const userMetadata = { publication, phone, address: addr1, addressTwo: addr2, city, state, zip, country }
@@ -28,7 +27,7 @@ function Signup() {
         }
         return login(email, password)
       })
-      .catch(err => setMsg('Error: ' + getError(err)))
+      .catch(error => setMessage('Error: ' + getError(error)))
   }
 
   return (
@@ -63,7 +62,7 @@ function Signup() {
         <div>
           <button className='button m05 akz caps mr1'>Sign Up </button>
           or <Link to='/login' className='underline'>Login</Link>
-          {msg && <pre className='auth__error'>{msg}</pre>}
+          {message && <pre className='auth__error'>{message}</pre>}
         </div>
         <div className='mt1 pt1'>
           <span className='akz-e caps small mb1 inline-block'>Optional</span>
@@ -360,7 +359,7 @@ function Signup() {
           <div className='mt1'>
             <button className='button m05 akz caps mr1'>Sign Up </button>
             or <Link to='/login' className='underline'>Login</Link>
-            {msg && <pre className='auth__error'>{msg}</pre>}
+            {message && <pre className='auth__error'>{message}</pre>}
           </div>
         </div>
       </form>
