@@ -4,7 +4,7 @@
 
 function Environment() {
   if (process.env.REACT_APP_TYPE === 'production') {
-    return 'staging'
+    return 'production'
   } else {
     return 'staging'
   }
